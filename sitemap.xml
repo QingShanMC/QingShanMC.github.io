@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://macongmc.github.io/posts/d32d37e5.html</loc>
+    
+    <lastmod>2022-08-04</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://macongmc.github.io/posts/5bbc7517.html</loc>
     
     <lastmod>2022-08-03</lastmod>
@@ -481,6 +488,13 @@
   
   <url>
     <loc>https://macongmc.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://macongmc.github.io/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

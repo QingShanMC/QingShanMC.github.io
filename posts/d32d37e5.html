@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="听听音乐, Mc 计算机 开发">
+    <meta name="keywords" content="Elasticsearch, Mc 计算机 开发">
     <meta name="description" content="本科 | 计算机科学与技术 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>听听音乐 | 青山</title>
+    <title>Elasticsearch | 青山</title>
 
     <link rel="icon" type="image/jpeg" href="https://s1.ax1x.com/2020/05/17/YR20js.jpg">
 
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013951.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://pic1.zhimg.com/v2-516319f1b7b1a63d03591bff8ba445a6_720w.jpg?source=172ae18b')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">听听音乐</h1>
+                    <h1 class="description center-align post-title">Elasticsearch</h1>
                 </div>
             </div>
         </div>
@@ -634,12 +634,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">
+                                <span class="chip bg-color">搜索引擎</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/API/" class="post-category">
+                                API
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -648,28 +661,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-19
+                    2022-08-04
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-07-24
+                    2022-08-04
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    605
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -687,7 +700,134 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="一-搭建ElasticSearch环境"><a href="#一-搭建ElasticSearch环境" class="headerlink" title="一.搭建ElasticSearch环境"></a>一.搭建ElasticSearch环境</h2><p>拉去镜像</p>
+<pre class="line-numbers language-none"><code class="language-none">docker pull elasticsearch:7.4.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>创建容器</p>
+<pre class="line-numbers language-none"><code class="language-none">docker run -id --name elasticsearch -d --restart=always -p 9200:9200 -p 9300:9300 -v /usr/share/elasticsearch/plugins:/usr/share/elasticsearch/plugins -e "discovery.type=single-node" elasticsearch:7.4.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>配置分词器<br>把资料中的<code>elasticsearch-analysis-ik-7.4.0.zip</code>上传到服务器上,放到对应目录（plugins）解压</p>
+<pre class="line-numbers language-none"><code class="language-none">#切换目录
+cd /usr/share/elasticsearch/plugins
+#新建目录
+mkdir analysis-ik
+cd analysis-ik
+#root根目录中拷贝文件
+mv elasticsearch-analysis-ik-7.4.0.zip /usr/share/elasticsearch/plugins/analysis-ik
+#解压文件
+cd /usr/share/elasticsearch/plugins/analysis-ik
+unzip elasticsearch-analysis-ik-7.4.0.zip<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="二-批量导入数据库"><a href="#二-批量导入数据库" class="headerlink" title="二.批量导入数据库"></a>二.批量导入数据库</h2><h3 id="1-依赖"><a href="#1-依赖" class="headerlink" title="1.依赖"></a>1.依赖</h3><pre class="line-numbers language-none"><code class="language-none">&lt;!--elasticsearch--&gt;
+       &lt;dependency&gt;
+           &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;
+           &lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;
+           &lt;version&gt;7.4.0&lt;/version&gt;
+       &lt;/dependency&gt;
+       &lt;dependency&gt;
+           &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;
+           &lt;artifactId&gt;elasticsearch-rest-client&lt;/artifactId&gt;
+           &lt;version&gt;7.4.0&lt;/version&gt;
+       &lt;/dependency&gt;
+       &lt;dependency&gt;
+           &lt;groupId&gt;org.elasticsearch&lt;/groupId&gt;
+           &lt;artifactId&gt;elasticsearch&lt;/artifactId&gt;
+           &lt;version&gt;7.4.0&lt;/version&gt;
+       &lt;/dependency&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-配置类"><a href="#2-配置类" class="headerlink" title="2.配置类"></a>2.配置类</h3><pre class="line-numbers language-none"><code class="language-none">import lombok.Getter;
+import lombok.Setter;
+import org.apache.http.HttpHost;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Getter
+@Setter
+@Configuration
+@ConfigurationProperties(prefix = "elasticsearch")
+public class ElasticSearchConfig {
+    private String host;
+    private int port;
+
+    @Bean
+    public RestHighLevelClient client(){
+        return new RestHighLevelClient(RestClient.builder(
+                new HttpHost(
+                        host,
+                        port,
+                        "http"
+                )
+        ));
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3.配置文件"></a>3.配置文件</h3><pre class="line-numbers language-none"><code class="language-none">server:
+  port: 9999
+spring:
+  application:
+    name: es-article
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://82.157.254.101:3306/leadnews_article?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC
+    username: 
+    password: 
+# 设置Mapper接口所对应的XML文件位置，如果你在Mapper接口中有自定义方法，需要进行该配置
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  # 设置别名包扫描路径，通过该属性可以给包中的类注册别名
+  type-aliases-package: com.heima.model.article.pojos
+
+
+#自定义elasticsearch连接配置
+elasticsearch:
+  host: 82.157.254.101
+  port: 9200<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-代码"><a href="#4-代码" class="headerlink" title="4.代码"></a>4.代码</h3><pre class="line-numbers language-none"><code class="language-none">@SpringBootTest
+@RunWith(SpringRunner.class)
+public class ApArticleTest {
+
+    @Autowired
+    private ApArticleMapper apArticleMapper;
+
+    @Autowired
+    private RestHighLevelClient restHighLevelClient;
+
+
+    /**
+     * 注意：数据量的导入，如果数据量过大，需要分页导入
+     * @throws Exception
+     */
+
+    /**
+     * 注意：数据量的导入，如果数据量过大，需要分页导入
+     * @throws Exception
+     */
+    @Test
+    public void init() throws Exception {
+        //1.查询所有符合条件的文章数据
+        List&lt;SearchArticleVo&gt; searchArticleVos = apArticleMapper.loadArticleList();
+
+        //2.批量导入到es索引库
+
+        BulkRequest bulkRequest = new BulkRequest("app_info_article");
+
+        for (SearchArticleVo searchArticleVo : searchArticleVos) {
+
+            IndexRequest indexRequest = new IndexRequest().id(searchArticleVo.getId().toString())
+                    .source(JSON.toJSONString(searchArticleVo), XContentType.JSON);
+
+            //批量添加数据
+            bulkRequest.add(indexRequest);
+
+        }
+        restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a target="_blank" rel="noopener" href="https://elasticsearch.bookhub.zone/#/rest_apis/search_apis/vector_tile_search">中文文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1459354">javaApi</a></p>
+
                 
             </div>
             <hr/>
@@ -703,7 +843,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">青山</a>
+                    <a href="/about" rel="external nofollow noreferrer">马聪</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -713,7 +853,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://macongmc.github.io/List/tools/index.html">https://macongmc.github.io/List/tools/index.html</a>
+                    <a href="https://macongmc.github.io/posts/d32d37e5.html">https://macongmc.github.io/posts/d32d37e5.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -726,7 +866,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">青山</a>
+                    <a href="/about" target="_blank">马聪</a>
                     !
                 </span>
             </div>
@@ -750,7 +890,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">
+                                    <span class="chip bg-color">搜索引擎</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -1225,13 +1369,12 @@ new Valine({
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/List/tools/index.html">
+                <a href="/posts/d32d37e5.html">
                     <div class="card-image">
                         
+                        <img src="https://pic1.zhimg.com/v2-516319f1b7b1a63d03591bff8ba445a6_720w.jpg?source=172ae18b" class="responsive-img" alt="Elasticsearch">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013951.jpg" class="responsive-img" alt="听听音乐">
-                        
-                        <span class="card-title">听听音乐</span>
+                        <span class="card-title">Elasticsearch</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1242,17 +1385,29 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-04
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            青山
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/API/" class="post-category">
+                                    API
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">
+                        <span class="chip bg-color">搜索引擎</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1260,16 +1415,15 @@ new Valine({
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/List/tools/index.html">
+                <a href="/posts/5bbc7517.html">
                     <div class="card-image">
                         
+                        <img src="https://x0.ifengimg.com/res/2019/6C452FBA451584CDA8789D2FEBF9A2D4E0C6F57B_size1215_w2560_h1707.jpeg" class="responsive-img" alt="kafka">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013951.jpg" class="responsive-img" alt="听听音乐">
-                        
-                        <span class="card-title">听听音乐</span>
+                        <span class="card-title">kafka</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1280,17 +1434,32 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-03
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            青山
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/API/" class="post-category">
+                                    API
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/kafka/">
+                        <span class="chip bg-color">kafka</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <span class="chip bg-color">消息队列</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
