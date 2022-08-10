@@ -6,7 +6,7 @@
   <link href="https://macongmc.github.io/atom.xml" rel="self"/>
   
   <link href="https://macongmc.github.io/"/>
-  <updated>2022-08-07T14:15:44.000Z</updated>
+  <updated>2022-08-10T00:41:24.000Z</updated>
   <id>https://macongmc.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算代码行数</title>
+    <link href="https://macongmc.github.io/posts/a7ab6980.html"/>
+    <id>https://macongmc.github.io/posts/a7ab6980.html</id>
+    <published>2022-08-10T00:41:24.000Z</published>
+    <updated>2022-08-10T00:41:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>package com;</p><p>import java.io.File;<br>import java.nio.file.Files;<br>import java.nio.file.Paths;<br>import java.util.Objects;<br>import java.util.function.Consumer;<br>import java.util.function.Function;<br>import java.util.stream.Stream;</p><p>/**</p><ul><li><p>Desc: 统计项目代码行数</p></li><li><p>Created by Java指南者 on 2020-06-25 14:49</p></li><li><p>/<br>public class ProjectCodeCount {<br>  public static <t> Consumer<t> cof(UncheckedConsumer<t> mapper) {</t></t></t></p><pre><code>  Objects.requireNonNull(mapper);  return t -&gt; {      try {          mapper.accept(t);      } catch (Exception ex) {          throw new RuntimeException(ex);      }  };</code></pre><p>  }</p><p>  public static <t> Consumer<t> ncof(UncheckedConsumer<t> mapper) {</t></t></t></p><pre><code>  Objects.requireNonNull(mapper);  return t -&gt; {      try {          mapper.accept(t);      } catch (Exception ex) {          ex.printStackTrace();      }  };</code></pre><p>  }</p><p>  public static &lt;T, R&gt; Function&lt;T, R&gt; of(UncheckedFunction&lt;T, R&gt; mapper) {</p><pre><code>  Objects.requireNonNull(mapper);  return t -&gt; {      try {          return mapper.apply(t);      } catch (Exception ex) {          throw new RuntimeException(ex);      }  };</code></pre><p>  }</p><p>  public static &lt;T, R&gt; Function&lt;T, R&gt; eof(UncheckedFunction&lt;T, R&gt; mapper, Exception cex) {</p><pre><code>  Objects.requireNonNull(mapper);  return t -&gt; {      try {          return mapper.apply(t);      } catch (Exception ex) {          if (cex != null &amp;&amp; cex.getClass() == ex.getClass()) {              throw new RuntimeException(cex);          } else {              throw new RuntimeException(ex);          }      }  };</code></pre><p>  }</p><p>  public static &lt;T, R&gt; Function&lt;T, R&gt; of(UncheckedFunction&lt;T, R&gt; mapper, R defaultR) {</p><pre><code>  Objects.requireNonNull(mapper);  return t -&gt; {      try {          return mapper.apply(t);      } catch (Exception ex) {          ex.printStackTrace(System.err);          return defaultR;      }  };</code></pre><p>  }</p><p>  @FunctionalInterface<br>  public static interface UncheckedFunction&lt;T, R&gt; {</p><pre><code>  R apply(T t) throws Exception;</code></pre><p>  }</p><p>  @FunctionalInterface<br>  public static interface UncheckedConsumer<t> {</t></p><pre><code>  void accept(T t) throws Exception;</code></pre><p>  }</p><p>  /**</p><ul><li>查看项目文件夹下的代码行数</li><li></li><li>@param args</li><li>@throws Exception</li><li>/<br>public static void main(String[] args) throws Exception {<br>  String path = “C:\Users\16231\Desktop\test\safe-edu-servers\safe-edu-server”;<br>  File f = new File(path);<br>  File[] files = f.listFiles();<br>  if (files == null || files.length &lt; 1) {<pre><code>  return;</code></pre>  }<br>  int allCount = 0;<br>  for (File fi : files) {<pre><code>  String[] split = fi.toString().split("/");  if (fi.isDirectory() &amp;&amp; !split[split.length - 1].startsWith(".")) {      long count = Files.walk(Paths.get(fi.toString()))    // 递归获得项目目录下的所有文件              .filter(file -&gt; !Files.isDirectory(file))   // 筛选出文件              .filter(file -&gt; file.toString().endsWith(".java"))  // 筛选出 java 文件              .flatMap(ProjectCodeCount.of(file -&gt; Files.lines(file), Stream.empty()))     // 将会抛出受检异常的 Lambda 包装为 抛出非受检异常的 Lambda              .filter(line -&gt; !line.trim().isEmpty())         // 过滤掉空行              .filter(line -&gt; !line.trim().startsWith("//"))  //过滤掉 //之类的注释              .filter(line -&gt; !(line.trim().startsWith("/*") &amp;&amp; line.trim().endsWith("*/")))  //过滤掉/* */之类的注释              .filter(line -&gt; !(line.trim().startsWith("/*") &amp;&amp; !line.trim().endsWith("*/")))     //过滤掉以 /* 开头的注释（去除空格后的开头）              .filter(line -&gt; !(!line.trim().startsWith("/*") &amp;&amp; line.trim().endsWith("*/")))     //过滤掉已 */ 结尾的注释              .filter(line -&gt; !line.trim().startsWith("*"))   //过滤掉 javadoc 中的文字注释              .filter(line -&gt; !line.trim().startsWith("@Override"))   //过滤掉方法上含 @Override 的              .count();      System.out.println(split[split.length - 1] + " : " + count);      allCount += count;  }</code></pre>  }<br>  System.out.println(“总的代码行数：” + allCount);<br>}<br>}</li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="工具篇" scheme="https://macongmc.github.io/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/"/>
+    
+    
+    <category term="计算" scheme="https://macongmc.github.io/tags/%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>Seata</title>

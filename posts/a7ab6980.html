@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Mc 计算机 开发">
+    <meta name="keywords" content="计算代码行数, Mc 计算机 开发">
     <meta name="description" content="本科 | 计算机科学与技术 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>青山</title>
+    <title>计算代码行数 | 青山</title>
 
     <link rel="icon" type="image/jpeg" href="https://s1.ax1x.com/2020/05/17/YR20js.jpg">
 
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928021815.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://tse3-mm.cn.bing.net/th/id/OIP-C.l04YHZWoA_InJEhSlmwvFQHaE7?pid=ImgDet&rs=1')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">计算代码行数</h1>
                 </div>
             </div>
         </div>
@@ -634,12 +634,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97/">
+                                <span class="chip bg-color">计算</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" class="post-category">
+                                工具篇
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -648,28 +661,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-24
+                    2022-08-10
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-07-24
+                    2022-08-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5
+                    557
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -687,7 +700,113 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                google-site-verification: google110e5e5e14c8dcf0.html
+                <p>package com;</p>
+<p>import java.io.File;<br>import java.nio.file.Files;<br>import java.nio.file.Paths;<br>import java.util.Objects;<br>import java.util.function.Consumer;<br>import java.util.function.Function;<br>import java.util.stream.Stream;</p>
+<p>/**</p>
+<ul>
+<li><p>Desc: 统计项目代码行数</p>
+</li>
+<li><p>Created by Java指南者 on 2020-06-25 14:49</p>
+</li>
+<li><p>/<br>public class ProjectCodeCount {<br>  public static <t> Consumer<t> cof(UncheckedConsumer<t> mapper) {</t></t></t></p>
+<pre><code>  Objects.requireNonNull(mapper);
+  return t -&gt; {
+      try {
+          mapper.accept(t);
+      } catch (Exception ex) {
+          throw new RuntimeException(ex);
+      }
+  };
+</code></pre>
+<p>  }</p>
+<p>  public static <t> Consumer<t> ncof(UncheckedConsumer<t> mapper) {</t></t></t></p>
+<pre><code>  Objects.requireNonNull(mapper);
+  return t -&gt; {
+      try {
+          mapper.accept(t);
+      } catch (Exception ex) {
+          ex.printStackTrace();
+      }
+  };
+</code></pre>
+<p>  }</p>
+<p>  public static &lt;T, R&gt; Function&lt;T, R&gt; of(UncheckedFunction&lt;T, R&gt; mapper) {</p>
+<pre><code>  Objects.requireNonNull(mapper);
+  return t -&gt; {
+      try {
+          return mapper.apply(t);
+      } catch (Exception ex) {
+          throw new RuntimeException(ex);
+      }
+  };
+</code></pre>
+<p>  }</p>
+<p>  public static &lt;T, R&gt; Function&lt;T, R&gt; eof(UncheckedFunction&lt;T, R&gt; mapper, Exception cex) {</p>
+<pre><code>  Objects.requireNonNull(mapper);
+  return t -&gt; {
+      try {
+          return mapper.apply(t);
+      } catch (Exception ex) {
+          if (cex != null &amp;&amp; cex.getClass() == ex.getClass()) {
+              throw new RuntimeException(cex);
+          } else {
+              throw new RuntimeException(ex);
+          }
+      }
+  };
+</code></pre>
+<p>  }</p>
+<p>  public static &lt;T, R&gt; Function&lt;T, R&gt; of(UncheckedFunction&lt;T, R&gt; mapper, R defaultR) {</p>
+<pre><code>  Objects.requireNonNull(mapper);
+  return t -&gt; {
+      try {
+          return mapper.apply(t);
+      } catch (Exception ex) {
+          ex.printStackTrace(System.err);
+          return defaultR;
+      }
+  };
+</code></pre>
+<p>  }</p>
+<p>  @FunctionalInterface<br>  public static interface UncheckedFunction&lt;T, R&gt; {</p>
+<pre><code>  R apply(T t) throws Exception;
+</code></pre>
+<p>  }</p>
+<p>  @FunctionalInterface<br>  public static interface UncheckedConsumer<t> {</t></p>
+<pre><code>  void accept(T t) throws Exception;
+</code></pre>
+<p>  }</p>
+<p>  /**</p>
+<ul>
+<li>查看项目文件夹下的代码行数</li>
+<li></li>
+<li>@param args</li>
+<li>@throws Exception</li>
+<li>/<br>public static void main(String[] args) throws Exception {<br>  String path = “C:\Users\16231\Desktop\test\safe-edu-servers\safe-edu-server”;<br>  File f = new File(path);<br>  File[] files = f.listFiles();<br>  if (files == null || files.length &lt; 1) {<pre><code>  return;
+</code></pre>
+  }<br>  int allCount = 0;<br>  for (File fi : files) {<pre><code>  String[] split = fi.toString().split("/");
+  if (fi.isDirectory() &amp;&amp; !split[split.length - 1].startsWith(".")) {
+      long count = Files.walk(Paths.get(fi.toString()))    // 递归获得项目目录下的所有文件
+              .filter(file -&gt; !Files.isDirectory(file))   // 筛选出文件
+              .filter(file -&gt; file.toString().endsWith(".java"))  // 筛选出 java 文件
+              .flatMap(ProjectCodeCount.of(file -&gt; Files.lines(file), Stream.empty()))     // 将会抛出受检异常的 Lambda 包装为 抛出非受检异常的 Lambda
+              .filter(line -&gt; !line.trim().isEmpty())         // 过滤掉空行
+              .filter(line -&gt; !line.trim().startsWith("//"))  //过滤掉 //之类的注释
+              .filter(line -&gt; !(line.trim().startsWith("/*") &amp;&amp; line.trim().endsWith("*/")))  //过滤掉/* */之类的注释
+              .filter(line -&gt; !(line.trim().startsWith("/*") &amp;&amp; !line.trim().endsWith("*/")))     //过滤掉以 /* 开头的注释（去除空格后的开头）
+              .filter(line -&gt; !(!line.trim().startsWith("/*") &amp;&amp; line.trim().endsWith("*/")))     //过滤掉已 */ 结尾的注释
+              .filter(line -&gt; !line.trim().startsWith("*"))   //过滤掉 javadoc 中的文字注释
+              .filter(line -&gt; !line.trim().startsWith("@Override"))   //过滤掉方法上含 @Override 的
+              .count();
+      System.out.println(split[split.length - 1] + " : " + count);
+      allCount += count;
+  }
+</code></pre>
+  }<br>  System.out.println(“总的代码行数：” + allCount);<br>}<br>}</li>
+</ul>
+</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -703,7 +822,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">青山</a>
+                    <a href="/about" rel="external nofollow noreferrer">马聪</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -713,7 +832,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://macongmc.github.io/google1xxxxxxx0.html">https://macongmc.github.io/google1xxxxxxx0.html</a>
+                    <a href="https://macongmc.github.io/posts/a7ab6980.html">https://macongmc.github.io/posts/a7ab6980.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -726,7 +845,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">青山</a>
+                    <a href="/about" target="_blank">马聪</a>
                     !
                 </span>
             </div>
@@ -750,7 +869,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97/">
+                                    <span class="chip bg-color">计算</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -1225,13 +1348,12 @@ new Valine({
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/google1xxxxxxx0.html">
+                <a href="/posts/a7ab6980.html">
                     <div class="card-image">
                         
+                        <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.l04YHZWoA_InJEhSlmwvFQHaE7?pid=ImgDet&rs=1" class="responsive-img" alt="计算代码行数">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928021815.jpg" class="responsive-img" alt="">
-                        
-                        <span class="card-title"></span>
+                        <span class="card-title">计算代码行数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1242,17 +1364,29 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-10
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            青山
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" class="post-category">
+                                    工具篇
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97/">
+                        <span class="chip bg-color">计算</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1260,16 +1394,15 @@ new Valine({
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/google1xxxxxxx0.html">
+                <a href="/posts/8d9a091c.html">
                     <div class="card-image">
                         
+                        <img src="https://bpic.588ku.com/element_origin_min_pic/19/12/27/ed0422720abdb0739112dc1b827d11c1.jpg" class="responsive-img" alt="Seata">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928021815.jpg" class="responsive-img" alt="">
-                        
-                        <span class="card-title"></span>
+                        <span class="card-title">Seata</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1280,17 +1413,32 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-07
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            青山
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" class="post-category">
+                                    分布式事务
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%8B%E5%8A%A1/">
+                        <span class="chip bg-color">事务</span>
+                    </a>
+                    
+                    <a href="/tags/springcloud-alibaba/">
+                        <span class="chip bg-color">springcloud alibaba</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
