@@ -675,7 +675,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    557
+                    578
                 </div>
                 
 
@@ -700,112 +700,128 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>package com;</p>
-<p>import java.io.File;<br>import java.nio.file.Files;<br>import java.nio.file.Paths;<br>import java.util.Objects;<br>import java.util.function.Consumer;<br>import java.util.function.Function;<br>import java.util.stream.Stream;</p>
-<p>/**</p>
-<ul>
-<li><p>Desc: 统计项目代码行数</p>
-</li>
-<li><p>Created by Java指南者 on 2020-06-25 14:49</p>
-</li>
-<li><p>/<br>public class ProjectCodeCount {<br>  public static <t> Consumer<t> cof(UncheckedConsumer<t> mapper) {</t></t></t></p>
-<pre><code>  Objects.requireNonNull(mapper);
-  return t -&gt; {
-      try {
-          mapper.accept(t);
-      } catch (Exception ex) {
-          throw new RuntimeException(ex);
-      }
-  };
-</code></pre>
-<p>  }</p>
-<p>  public static <t> Consumer<t> ncof(UncheckedConsumer<t> mapper) {</t></t></t></p>
-<pre><code>  Objects.requireNonNull(mapper);
-  return t -&gt; {
-      try {
-          mapper.accept(t);
-      } catch (Exception ex) {
-          ex.printStackTrace();
-      }
-  };
-</code></pre>
-<p>  }</p>
-<p>  public static &lt;T, R&gt; Function&lt;T, R&gt; of(UncheckedFunction&lt;T, R&gt; mapper) {</p>
-<pre><code>  Objects.requireNonNull(mapper);
-  return t -&gt; {
-      try {
-          return mapper.apply(t);
-      } catch (Exception ex) {
-          throw new RuntimeException(ex);
-      }
-  };
-</code></pre>
-<p>  }</p>
-<p>  public static &lt;T, R&gt; Function&lt;T, R&gt; eof(UncheckedFunction&lt;T, R&gt; mapper, Exception cex) {</p>
-<pre><code>  Objects.requireNonNull(mapper);
-  return t -&gt; {
-      try {
-          return mapper.apply(t);
-      } catch (Exception ex) {
-          if (cex != null &amp;&amp; cex.getClass() == ex.getClass()) {
-              throw new RuntimeException(cex);
-          } else {
-              throw new RuntimeException(ex);
-          }
-      }
-  };
-</code></pre>
-<p>  }</p>
-<p>  public static &lt;T, R&gt; Function&lt;T, R&gt; of(UncheckedFunction&lt;T, R&gt; mapper, R defaultR) {</p>
-<pre><code>  Objects.requireNonNull(mapper);
-  return t -&gt; {
-      try {
-          return mapper.apply(t);
-      } catch (Exception ex) {
-          ex.printStackTrace(System.err);
-          return defaultR;
-      }
-  };
-</code></pre>
-<p>  }</p>
-<p>  @FunctionalInterface<br>  public static interface UncheckedFunction&lt;T, R&gt; {</p>
-<pre><code>  R apply(T t) throws Exception;
-</code></pre>
-<p>  }</p>
-<p>  @FunctionalInterface<br>  public static interface UncheckedConsumer<t> {</t></p>
-<pre><code>  void accept(T t) throws Exception;
-</code></pre>
-<p>  }</p>
-<p>  /**</p>
-<ul>
-<li>查看项目文件夹下的代码行数</li>
-<li></li>
-<li>@param args</li>
-<li>@throws Exception</li>
-<li>/<br>public static void main(String[] args) throws Exception {<br>  String path = “C:\Users\16231\Desktop\test\safe-edu-servers\safe-edu-server”;<br>  File f = new File(path);<br>  File[] files = f.listFiles();<br>  if (files == null || files.length &lt; 1) {<pre><code>  return;
-</code></pre>
-  }<br>  int allCount = 0;<br>  for (File fi : files) {<pre><code>  String[] split = fi.toString().split("/");
-  if (fi.isDirectory() &amp;&amp; !split[split.length - 1].startsWith(".")) {
-      long count = Files.walk(Paths.get(fi.toString()))    // 递归获得项目目录下的所有文件
-              .filter(file -&gt; !Files.isDirectory(file))   // 筛选出文件
-              .filter(file -&gt; file.toString().endsWith(".java"))  // 筛选出 java 文件
-              .flatMap(ProjectCodeCount.of(file -&gt; Files.lines(file), Stream.empty()))     // 将会抛出受检异常的 Lambda 包装为 抛出非受检异常的 Lambda
-              .filter(line -&gt; !line.trim().isEmpty())         // 过滤掉空行
-              .filter(line -&gt; !line.trim().startsWith("//"))  //过滤掉 //之类的注释
-              .filter(line -&gt; !(line.trim().startsWith("/*") &amp;&amp; line.trim().endsWith("*/")))  //过滤掉/* */之类的注释
-              .filter(line -&gt; !(line.trim().startsWith("/*") &amp;&amp; !line.trim().endsWith("*/")))     //过滤掉以 /* 开头的注释（去除空格后的开头）
-              .filter(line -&gt; !(!line.trim().startsWith("/*") &amp;&amp; line.trim().endsWith("*/")))     //过滤掉已 */ 结尾的注释
-              .filter(line -&gt; !line.trim().startsWith("*"))   //过滤掉 javadoc 中的文字注释
-              .filter(line -&gt; !line.trim().startsWith("@Override"))   //过滤掉方法上含 @Override 的
-              .count();
-      System.out.println(split[split.length - 1] + " : " + count);
-      allCount += count;
-  }
-</code></pre>
-  }<br>  System.out.println(“总的代码行数：” + allCount);<br>}<br>}</li>
-</ul>
-</li>
-</ul>
+                <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>nio<span class="token punctuation">.</span>file<span class="token punctuation">.</span></span><span class="token class-name">Files</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>nio<span class="token punctuation">.</span>file<span class="token punctuation">.</span></span><span class="token class-name">Paths</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Objects</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>function<span class="token punctuation">.</span></span><span class="token class-name">Consumer</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>function<span class="token punctuation">.</span></span><span class="token class-name">Function</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>stream<span class="token punctuation">.</span></span><span class="token class-name">Stream</span><span class="token punctuation">;</span>
+ 
+<span class="token comment">/**
+ * Desc: 统计项目代码行数
+ * Created by Java指南者 on 2020-06-25 14:49
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProjectCodeCount</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token class-name">Consumer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token function">cof</span><span class="token punctuation">(</span><span class="token class-name">UncheckedConsumer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> mapper<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>mapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> t <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                mapper<span class="token punctuation">.</span><span class="token function">accept</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token class-name">Consumer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token function">ncof</span><span class="token punctuation">(</span><span class="token class-name">UncheckedConsumer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> mapper<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>mapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> t <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                mapper<span class="token punctuation">.</span><span class="token function">accept</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                ex<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> <span class="token class-name">Function</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> <span class="token function">of</span><span class="token punctuation">(</span><span class="token class-name">UncheckedFunction</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> mapper<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>mapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> t <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> mapper<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> <span class="token class-name">Function</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> <span class="token function">eof</span><span class="token punctuation">(</span><span class="token class-name">UncheckedFunction</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> mapper<span class="token punctuation">,</span> <span class="token class-name">Exception</span> cex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>mapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> t <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> mapper<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>cex <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> cex<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> ex<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>cex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> <span class="token class-name">Function</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> <span class="token function">of</span><span class="token punctuation">(</span><span class="token class-name">UncheckedFunction</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> mapper<span class="token punctuation">,</span> <span class="token class-name">R</span> defaultR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>mapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> t <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> mapper<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                ex<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> defaultR<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    <span class="token annotation punctuation">@FunctionalInterface</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">interface</span> <span class="token class-name">UncheckedFunction</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+        <span class="token class-name">R</span> <span class="token function">apply</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    <span class="token annotation punctuation">@FunctionalInterface</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">interface</span> <span class="token class-name">UncheckedConsumer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+        <span class="token keyword">void</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    <span class="token comment">/**
+     * 查看项目文件夹下的代码行数
+     *
+     * @param args
+     * @throws Exception
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token class-name">String</span> path <span class="token operator">=</span> <span class="token string">"C:\\Users\\16231\\Desktop\\test\\safe-edu-servers\\safe-edu-server"</span><span class="token punctuation">;</span>
+        <span class="token class-name">File</span> f <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">File</span><span class="token punctuation">[</span><span class="token punctuation">]</span> files <span class="token operator">=</span> f<span class="token punctuation">.</span><span class="token function">listFiles</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>files <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> files<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">int</span> allCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">File</span> fi <span class="token operator">:</span> files<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> split <span class="token operator">=</span> fi<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>fi<span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>split<span class="token punctuation">[</span>split<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">long</span> count <span class="token operator">=</span> <span class="token class-name">Files</span><span class="token punctuation">.</span><span class="token function">walk</span><span class="token punctuation">(</span><span class="token class-name">Paths</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>fi<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token comment">// 递归获得项目目录下的所有文件</span>
+                        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>file <span class="token operator">-&gt;</span> <span class="token operator">!</span><span class="token class-name">Files</span><span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token comment">// 筛选出文件</span>
+                        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>file <span class="token operator">-&gt;</span> file<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">".java"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">// 筛选出 java 文件</span>
+                        <span class="token punctuation">.</span><span class="token function">flatMap</span><span class="token punctuation">(</span><span class="token class-name">ProjectCodeCount</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>file <span class="token operator">-&gt;</span> <span class="token class-name">Files</span><span class="token punctuation">.</span><span class="token function">lines</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">Stream</span><span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>     <span class="token comment">// 将会抛出受检异常的 Lambda 包装为 抛出非受检异常的 Lambda</span>
+                        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>line <span class="token operator">-&gt;</span> <span class="token operator">!</span>line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>         <span class="token comment">// 过滤掉空行</span>
+                        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>line <span class="token operator">-&gt;</span> <span class="token operator">!</span>line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"//"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">//过滤掉 //之类的注释</span>
+                        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>line <span class="token operator">-&gt;</span> <span class="token operator">!</span><span class="token punctuation">(</span>line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"/*"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">"*/"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">//过滤掉/* */之类的注释</span>
+                        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>line <span class="token operator">-&gt;</span> <span class="token operator">!</span><span class="token punctuation">(</span>line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"/*"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">"*/"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>     <span class="token comment">//过滤掉以 /* 开头的注释（去除空格后的开头）</span>
+                        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>line <span class="token operator">-&gt;</span> <span class="token operator">!</span><span class="token punctuation">(</span><span class="token operator">!</span>line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"/*"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">"*/"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>     <span class="token comment">//过滤掉已 */ 结尾的注释</span>
+                        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>line <span class="token operator">-&gt;</span> <span class="token operator">!</span>line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token comment">//过滤掉 javadoc 中的文字注释</span>
+                        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>line <span class="token operator">-&gt;</span> <span class="token operator">!</span>line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"@Override"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token comment">//过滤掉方法上含 @Override 的</span>
+                        <span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>split<span class="token punctuation">[</span>split<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">" : "</span> <span class="token operator">+</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                allCount <span class="token operator">+=</span> count<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"总的代码行数："</span> <span class="token operator">+</span> allCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
