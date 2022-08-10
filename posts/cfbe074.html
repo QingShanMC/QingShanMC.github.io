@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Mc 计算机 开发">
+    <meta name="keywords" content="分布式任务调度-xxl-job, Mc 计算机 开发">
     <meta name="description" content="本科 | 计算机科学与技术 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>青山</title>
+    <title>分布式任务调度-xxl-job | 青山</title>
 
     <link rel="icon" type="image/jpeg" href="https://s1.ax1x.com/2020/05/17/YR20js.jpg">
 
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928021815.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://tse3-mm.cn.bing.net/th/id/OIP-C.fW3EWjkKtvrQ0qhazHlh1wHaE7?pid=ImgDet&rs=1')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">分布式任务调度-xxl-job</h1>
                 </div>
             </div>
         </div>
@@ -634,12 +634,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/api/">
+                                <span class="chip bg-color">api</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/xxl-job/" class="post-category">
+                                xxl-job
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -648,28 +661,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-24
+                    2022-08-10
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-07-24
+                    2022-08-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5
+                    899
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -687,7 +700,182 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                google-site-verification: google110e5e5e14c8dcf0.html
+                <h2 id="一-分布式任务调度-xxl-job"><a href="#一-分布式任务调度-xxl-job" class="headerlink" title="一.分布式任务调度-xxl-job"></a>一.分布式任务调度-xxl-job</h2><h3 id="1-文档地址"><a href="#1-文档地址" class="headerlink" title="1.文档地址"></a>1.文档地址</h3><p><a target="_blank" rel="noopener" href="https://www.xuxueli.com/xxl-job/">文档地址</a><br><a target="_blank" rel="noopener" href="https://gitee.com/xuxueli0323/xxl-job">源码地址</a></p>
+<h3 id="2-环境"><a href="#2-环境" class="headerlink" title="2.环境"></a>2.环境</h3><ul>
+<li>Maven3+</li>
+<li>Jdk1.8+</li>
+<li>Mysql5.7+</li>
+</ul>
+<h3 id="3-初始化数据库"><a href="#3-初始化数据库" class="headerlink" title="3.初始化数据库"></a>3.初始化数据库</h3><pre class="line-numbers language-none"><code class="language-none">- xxl_job_lock：任务调度锁表；
+- xxl_job_group：执行器信息表，维护任务执行器信息；
+- xxl_job_info：调度扩展信息表： 用于保存XXL-JOB调度任务的扩展信息，如任务分组、任务名、机器地址、执行器、执行入参和报警邮件等等；
+- xxl_job_log：调度日志表： 用于保存XXL-JOB任务调度的历史信息，如调度结果、执行结果、调度入参、调度机器和执行器等等；
+- xxl_job_logglue：任务GLUE日志：用于保存GLUE更新历史，用于支持GLUE的版本回溯功能；
+- xxl_job_registry：执行器注册表，维护在线的执行器和调度中心机器地址信息；
+- xxl_job_user：系统用户表；<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>调度中心支持集群部署，集群情况下各节点务必连接同一个mysql实例;</p>
+<p>如果mysql做主从,调度中心集群节点务必强制走主库;</p>
+<p>配置文件</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">### web
+server<span class="token punctuation">.</span>port<span class="token operator">=</span><span class="token number">8888</span>
+server<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>context<span class="token operator">-</span>path<span class="token operator">=</span><span class="token operator">/</span>xxl<span class="token operator">-</span>job<span class="token operator">-</span>admin
+
+### actuator
+management<span class="token punctuation">.</span>server<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>context<span class="token operator">-</span>path<span class="token operator">=</span><span class="token operator">/</span>actuator
+management<span class="token punctuation">.</span>health<span class="token punctuation">.</span>mail<span class="token punctuation">.</span>enabled<span class="token operator">=</span><span class="token boolean">false</span>
+
+### resources
+spring<span class="token punctuation">.</span>mvc<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">=</span><span class="token number">0</span>
+spring<span class="token punctuation">.</span>mvc<span class="token punctuation">.</span><span class="token keyword">static</span><span class="token operator">-</span>path<span class="token operator">-</span>pattern<span class="token operator">=</span><span class="token operator">/</span><span class="token keyword">static</span><span class="token comment">/**
+spring.resources.static-locations=classpath:/static/
+
+### freemarker
+spring.freemarker.templateLoaderPath=classpath:/templates/
+spring.freemarker.suffix=.ftl
+spring.freemarker.charset=UTF-8
+spring.freemarker.request-context-attribute=request
+spring.freemarker.settings.number_format=0.##########
+
+### mybatis
+mybatis.mapper-locations=classpath:/mybatis-mapper/*Mapper.xml
+#mybatis.type-aliases-package=com.xxl.job.admin.core.model
+
+### xxl-job, datasource
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/xxl_job?Unicode=true&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=UTF-8
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+### datasource-pool
+spring.datasource.type=com.zaxxer.hikari.HikariDataSource
+spring.datasource.hikari.minimum-idle=10
+spring.datasource.hikari.maximum-pool-size=30
+spring.datasource.hikari.auto-commit=true
+spring.datasource.hikari.idle-timeout=30000
+spring.datasource.hikari.pool-name=HikariCP
+spring.datasource.hikari.max-lifetime=900000
+spring.datasource.hikari.connection-timeout=10000
+spring.datasource.hikari.connection-test-query=SELECT 1
+
+### xxl-job, email
+spring.mail.host=smtp.qq.com
+spring.mail.port=25
+spring.mail.username=xxx@qq.com
+spring.mail.password=xxx
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.starttls.required=true
+spring.mail.properties.mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
+
+### xxl-job, access token
+xxl.job.accessToken=
+
+### xxl-job, i18n (default is zh_CN, and you can choose "zh_CN", "zh_TC" and "en")
+xxl.job.i18n=zh_CN
+
+## xxl-job, triggerpool max size
+xxl.job.triggerpool.fast.max=200
+xxl.job.triggerpool.slow.max=100
+
+### xxl-job, log retention days
+xxl.job.logretentiondays=30</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>启动调度中心，默认登录账号 “admin/123456”, 登录后运行界面如下图所示。</p>
+<h2 id="二-入门案例"><a href="#二-入门案例" class="headerlink" title="二.入门案例"></a>二.入门案例</h2><h3 id="1-docker"><a href="#1-docker" class="headerlink" title="1.docker"></a>1.docker</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">docker pull xuxueli<span class="token operator">/</span>xxl<span class="token operator">-</span>job<span class="token operator">-</span>admin<span class="token operator">:</span><span class="token number">2.3</span><span class="token number">.0</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run -e PARAMS="--spring.datasource.url=jdbc:mysql://192.168.200.130:3306/xxl_job?Unicode=true&amp;characterEncoding=UTF-8 \
+--spring.datasource.username=root \
+--spring.datasource.password=root" \
+-p 8888:8080 -v /tmp:/data/applogs \
+--name xxl-job-admin --restart=always  -d xuxueli/xxl-job-admin:2.3.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2.依赖</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependencies<span class="token punctuation">&gt;</span></span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>starter<span class="token operator">-</span>web<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>xxl<span class="token operator">-</span>job<span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>com<span class="token punctuation">.</span>xuxueli<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>xxl<span class="token operator">-</span>job<span class="token operator">-</span>core<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">2.3</span><span class="token number">.0</span><span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>dependencies<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-jade" data-language="jade"><code class="language-jade">server:
+  port: 8881
+
+
+xxl:
+  job:
+    admin:
+      addresses: http://192.168.200.130:8888/xxl-job-admin
+    executor:
+      appname: xxl-job-executor-sample
+      port: 9999<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xxl<span class="token punctuation">.</span>job<span class="token punctuation">.</span>core<span class="token punctuation">.</span>executor<span class="token punctuation">.</span>impl<span class="token punctuation">.</span></span><span class="token class-name">XxlJobSpringExecutor</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">Logger</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">LoggerFactory</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Value</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Bean</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Configuration</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * xxl-job config
+ *
+ * @author xuxueli 2017-04-28
+ */</span>
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">XxlJobConfig</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">Logger</span> logger <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">XxlJobConfig</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${xxl.job.admin.addresses}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> adminAddresses<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${xxl.job.executor.appname}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> appname<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${xxl.job.executor.port}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> port<span class="token punctuation">;</span>
+
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">XxlJobSpringExecutor</span> <span class="token function">xxlJobExecutor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        logger<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; xxl-job config init."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">XxlJobSpringExecutor</span> xxlJobSpringExecutor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XxlJobSpringExecutor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xxlJobSpringExecutor<span class="token punctuation">.</span><span class="token function">setAdminAddresses</span><span class="token punctuation">(</span>adminAddresses<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xxlJobSpringExecutor<span class="token punctuation">.</span><span class="token function">setAppname</span><span class="token punctuation">(</span>appname<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xxlJobSpringExecutor<span class="token punctuation">.</span><span class="token function">setPort</span><span class="token punctuation">(</span>port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> xxlJobSpringExecutor<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>xxl<span class="token punctuation">.</span>job<span class="token punctuation">.</span>core<span class="token punctuation">.</span>handler<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">XxlJob</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Component</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloJob</span> <span class="token punctuation">{</span>
+
+
+    <span class="token annotation punctuation">@XxlJob</span><span class="token punctuation">(</span><span class="token string">"demoJobHandler"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">helloJob</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"简单任务执行了。。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>执行器启动</p>
+
                 
             </div>
             <hr/>
@@ -703,7 +891,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">青山</a>
+                    <a href="/about" rel="external nofollow noreferrer">马聪</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -713,7 +901,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://macongmc.github.io/google1xxxxxxx0.html">https://macongmc.github.io/google1xxxxxxx0.html</a>
+                    <a href="https://macongmc.github.io/posts/cfbe074.html">https://macongmc.github.io/posts/cfbe074.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -726,7 +914,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">青山</a>
+                    <a href="/about" target="_blank">马聪</a>
                     !
                 </span>
             </div>
@@ -750,7 +938,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/api/">
+                                    <span class="chip bg-color">api</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -1225,13 +1417,12 @@ new Valine({
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/google1xxxxxxx0.html">
+                <a href="/posts/cfbe074.html">
                     <div class="card-image">
                         
+                        <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.fW3EWjkKtvrQ0qhazHlh1wHaE7?pid=ImgDet&rs=1" class="responsive-img" alt="分布式任务调度-xxl-job">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928021815.jpg" class="responsive-img" alt="">
-                        
-                        <span class="card-title"></span>
+                        <span class="card-title">分布式任务调度-xxl-job</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1242,17 +1433,29 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-10
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            青山
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/xxl-job/" class="post-category">
+                                    xxl-job
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/api/">
+                        <span class="chip bg-color">api</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1260,16 +1463,15 @@ new Valine({
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/google1xxxxxxx0.html">
+                <a href="/posts/a7ab6980.html">
                     <div class="card-image">
                         
+                        <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.l04YHZWoA_InJEhSlmwvFQHaE7?pid=ImgDet&rs=1" class="responsive-img" alt="计算代码行数">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928021815.jpg" class="responsive-img" alt="">
-                        
-                        <span class="card-title"></span>
+                        <span class="card-title">计算代码行数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1280,17 +1482,28 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-10
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            青山
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" class="post-category">
+                                    工具篇
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97/">
+                        <span class="chip bg-color">计算</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
