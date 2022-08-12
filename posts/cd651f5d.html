@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="注解翻译字典, Mc 计算机 开发">
+    <meta name="keywords" content="jenkisn(一）, Mc 计算机 开发">
     <meta name="description" content="本科 | 计算机科学与技术 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>注解翻译字典 | 青山</title>
+    <title>jenkisn(一） | 青山</title>
 
     <link rel="icon" type="image/jpeg" href="https://s1.ax1x.com/2020/05/17/YR20js.jpg">
 
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img95.699pic.com/photo/40068/7199.jpg_wh860.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://tse3-mm.cn.bing.net/th/id/OIP-C.CXnsm6LqYZbjlbyMZ2YrLAHaE7?pid=ImgDet&rs=1')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">注解翻译字典</h1>
+                    <h1 class="description center-align post-title">jenkisn(一）</h1>
                 </div>
             </div>
         </div>
@@ -636,12 +636,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/aop/">
-                                <span class="chip bg-color">aop</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%B3%A8%E8%A7%A3/">
-                                <span class="chip bg-color">注解</span>
+                            <a href="/tags/Jenkins/">
+                                <span class="chip bg-color">Jenkins</span>
                             </a>
                         
                     </div>
@@ -652,8 +648,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" class="post-category">
-                                工具篇
+                            <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/" class="post-category">
+                                持续集成
                             </a>
                         
                     </div>
@@ -665,28 +661,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-25
+                    2022-08-12
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-07-25
+                    2022-08-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    711
+                    322
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    1 分
                 </div>
                 
 
@@ -704,205 +700,65 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一-注解"><a href="#一-注解" class="headerlink" title="一.注解"></a>一.注解</h2><p>1.注解说明，自定义两个注解，一个进行标记字段，里面存字典字段的值，一个标记controller标记在那个查询方法上进行转化。</p>
-<p>字段注解：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">ElementType</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Retention</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Target</span><span class="token punctuation">;</span>
+                <h2 id="一-环境需求"><a href="#一-环境需求" class="headerlink" title="一.环境需求"></a>一.环境需求</h2><p>jenkins最新版目前需要JDK11。</p>
+<p>环境需求：jdk,mavn,git.</p>
+<p>jdk采取linux多环境安装。</p>
+<h2 id="二-安装JDK"><a href="#二-安装JDK" class="headerlink" title="二.安装JDK"></a>二.安装JDK</h2><h3 id="1-下载JDK8和JDK11"><a href="#1-下载JDK8和JDK11" class="headerlink" title="1.下载JDK8和JDK11"></a>1.下载JDK8和JDK11</h3><p>linux安装多版本</p>
+<p>解压两个JDK</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tar zxvf jdk-8u181-linux-x64.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span>FIELD<span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">Dict</span> <span class="token punctuation">{</span>
-    <span class="token comment">/**
-     * 需要翻译的字段名称
-     */</span>
-    <span class="token class-name">String</span> <span class="token function">fieldName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>设置环境变量</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">vim <span class="token operator">/</span>etc<span class="token operator">/</span>profile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>标记注解</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">ElementType</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Retention</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Target</span><span class="token punctuation">;</span>
+<p>配置</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export JAVA_HOME=/usr/local/jdk/jdk1.8.0_181
+export CLASSPATH=$:CLASSPATH:$JAVA_HOME/lib/
+export PATH=$PATH:$JAVA_HOME/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span>METHOD<span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">DoDict</span> <span class="token punctuation">{</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">source /etc/profile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="二-实现方法"><a href="#二-实现方法" class="headerlink" title="二.实现方法"></a>二.实现方法</h2><p>使用AOP对查询的返回结果进行判断。分别为对象或者集合分类。通过反射对字段进行翻译。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>fastjson<span class="token punctuation">.</span></span>JSON<span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>fastjson<span class="token punctuation">.</span></span><span class="token class-name">JSONObject</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>common<span class="token punctuation">.</span>core<span class="token punctuation">.</span>page<span class="token punctuation">.</span></span><span class="token class-name">TableDataInfo</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>safe<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Dict</span><span class="token punctuation">;</span>
+<p>1.8设置为默认JDK</p>
+<h3 id="2-多版本配置"><a href="#2-多版本配置" class="headerlink" title="2.多版本配置"></a>2.多版本配置</h3><p>查看JDK是否存在</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">alternatives --config java<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>safe<span class="token punctuation">.</span>init<span class="token punctuation">.</span></span><span class="token class-name">InitData</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>aspectj<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span><span class="token class-name">ProceedingJoinPoint</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>aspectj<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Around</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>aspectj<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Aspect</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>aspectj<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Pointcut</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Component</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span></span><span class="token class-name">Field</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span><span class="token punctuation">;</span>
-<span class="token annotation punctuation">@Aspect</span>
-<span class="token annotation punctuation">@Component</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DoDictAspect</span> <span class="token punctuation">{</span>
-    <span class="token annotation punctuation">@Pointcut</span><span class="token punctuation">(</span><span class="token string">"@annotation(com.fn.safe.annotation.DoDict)"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">}</span>
+<p>根据数字动态切换JDK</p>
+<p>添加两个版本的JDK</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_152/bin/java 序号<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-    <span class="token annotation punctuation">@Around</span><span class="token punctuation">(</span><span class="token string">"execute()"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">around</span><span class="token punctuation">(</span><span class="token class-name">ProceedingJoinPoint</span> point<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Throwable</span> <span class="token punctuation">{</span>
-        <span class="token class-name">Object</span> proceed <span class="token operator">=</span> point<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"JSON.toJSONString(proceed) = "</span> <span class="token operator">+</span> JSON<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>proceed<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<h2 id="三-安装maven"><a href="#三-安装maven" class="headerlink" title="三.安装maven"></a>三.安装maven</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
+<p>解压</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tar zxvf apache-maven-3.8.6-bin.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-        <span class="token function">doDict</span><span class="token punctuation">(</span>proceed<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> proceed<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<p>修改仓库</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">vi <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>maven<span class="token operator">/</span>apache<span class="token operator">-</span>maven<span class="token operator">-</span><span class="token number">3.6</span><span class="token number">.1</span><span class="token operator">/</span>conf<span class="token operator">/</span>settings<span class="token punctuation">.</span>xml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">doDict</span><span class="token punctuation">(</span><span class="token class-name">Object</span> proceed<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>proceed <span class="token keyword">instanceof</span> <span class="token class-name">TableDataInfo</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token class-name">Object</span> object <span class="token operator">=</span> <span class="token function">invert</span><span class="token punctuation">(</span>proceed<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token class-name">TableDataInfo</span> dataInfo <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">TableDataInfo</span><span class="token punctuation">)</span> proceed<span class="token punctuation">;</span>
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> rows <span class="token operator">=</span> dataInfo<span class="token punctuation">.</span><span class="token function">getRows</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span>  rowsDict<span class="token operator">=</span><span class="token function">convertList</span><span class="token punctuation">(</span>rows<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        dataInfo<span class="token punctuation">.</span><span class="token function">setRows</span><span class="token punctuation">(</span>rowsDict<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>dataInfo<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<p>配置阿里云镜像</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">&lt;mirror&gt;
+	&lt;id&gt;alimaven&lt;/id&gt;
+	&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+	&lt;name&gt;aliyun maven&lt;/name&gt;
+	&lt;url&gt;http://maven.aliyun.com/nexus/content/repositories/central/&lt;/url&gt;
+&lt;/mirror&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-    <span class="token keyword">private</span> <span class="token class-name">Object</span> <span class="token function">invert</span><span class="token punctuation">(</span><span class="token class-name">Object</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">filedName</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> obj<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<p>配置环境变量</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export MAVEN_HOME=/usr/local/maven/apache-maven-3.6.1
+export PATH=$PATH:$MAVEN_HOME/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">filedName</span><span class="token punctuation">(</span><span class="token class-name">Object</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> aClass <span class="token operator">=</span> obj<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Field</span><span class="token punctuation">[</span><span class="token punctuation">]</span> declaredFields <span class="token operator">=</span> aClass<span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Field</span> declaredField <span class="token operator">:</span> declaredFields<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            declaredField<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>declaredField<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token class-name">Dict</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                <span class="token keyword">continue</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token class-name">String</span> fieldName <span class="token operator">=</span> declaredField<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token class-name">Dict</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fieldName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">try</span> <span class="token punctuation">{</span>
-                <span class="token class-name">Object</span> fieldValue <span class="token operator">=</span> declaredField<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>fieldValue<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                    <span class="token class-name">Dict</span> dict <span class="token operator">=</span> declaredField<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token class-name">Dict</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">String</span> dictName <span class="token operator">=</span> dict<span class="token punctuation">.</span><span class="token function">fieldName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">String</span> code <span class="token operator">=</span>dictName<span class="token operator">+</span><span class="token string">":"</span><span class="token operator">+</span>fieldValue<span class="token punctuation">;</span>
-                    <span class="token class-name">String</span> dictCode <span class="token operator">=</span> <span class="token class-name">InitData</span><span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    fieldValue <span class="token operator">=</span>dictCode<span class="token punctuation">;</span>
-                    declaredField<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span>fieldValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
+<p>赋权限</p>
+<pre class="line-numbers language-none"><code class="language-none">chmod 777 /usr/local/maven/apache-maven-3.6.1/bin/mvn<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IllegalAccessException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
+<p>刷新运行</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">source /etc/profile
+mvn-v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-    <span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> <span class="token function">convertList</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> rows<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>rows<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Object</span> row <span class="token operator">:</span> rows<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token function">filedName</span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> rows<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="四-安装git"><a href="#四-安装git" class="headerlink" title="四.安装git"></a>四.安装git</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yum -y install git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="三-使用方法"><a href="#三-使用方法" class="headerlink" title="三.使用方法"></a>三.使用方法</h2><p>标记放在controller</p>
-<p>翻译放在对象需要翻译的字段上。</p>
-<h2 id="四-实例代码"><a href="#四-实例代码" class="headerlink" title="四.实例代码"></a>四.实例代码</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>fastjson<span class="token punctuation">.</span></span>JSON<span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>fastjson<span class="token punctuation">.</span></span><span class="token class-name">JSONObject</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>common<span class="token punctuation">.</span>core<span class="token punctuation">.</span>page<span class="token punctuation">.</span></span><span class="token class-name">TableDataInfo</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>safe<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Dict</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">git version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>safe<span class="token punctuation">.</span>init<span class="token punctuation">.</span></span><span class="token class-name">InitData</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>commons<span class="token punctuation">.</span>lang3<span class="token punctuation">.</span></span><span class="token class-name">StringUtils</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>aspectj<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span><span class="token class-name">ProceedingJoinPoint</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>aspectj<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Around</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>aspectj<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Aspect</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>aspectj<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Pointcut</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Component</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span></span><span class="token class-name">Field</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span><span class="token punctuation">;</span>
-<span class="token annotation punctuation">@Aspect</span>
-<span class="token annotation punctuation">@Component</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DoDictAspect</span> <span class="token punctuation">{</span>
-    <span class="token annotation punctuation">@Pointcut</span><span class="token punctuation">(</span><span class="token string">"@annotation(com.fn.safe.annotation.DoDict)"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token annotation punctuation">@Around</span><span class="token punctuation">(</span><span class="token string">"execute()"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">around</span><span class="token punctuation">(</span><span class="token class-name">ProceedingJoinPoint</span> point<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Throwable</span> <span class="token punctuation">{</span>
-        <span class="token class-name">Object</span> proceed <span class="token operator">=</span> point<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"JSON.toJSONString(proceed) = "</span> <span class="token operator">+</span> JSON<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>proceed<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token function">doDict</span><span class="token punctuation">(</span>proceed<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> proceed<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">doDict</span><span class="token punctuation">(</span><span class="token class-name">Object</span> proceed<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>proceed <span class="token keyword">instanceof</span> <span class="token class-name">TableDataInfo</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token class-name">Object</span> object <span class="token operator">=</span> <span class="token function">invert</span><span class="token punctuation">(</span>proceed<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token class-name">TableDataInfo</span> dataInfo <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">TableDataInfo</span><span class="token punctuation">)</span> proceed<span class="token punctuation">;</span>
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> rows <span class="token operator">=</span> dataInfo<span class="token punctuation">.</span><span class="token function">getRows</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span>  rowsDict<span class="token operator">=</span><span class="token function">convertList</span><span class="token punctuation">(</span>rows<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        dataInfo<span class="token punctuation">.</span><span class="token function">setRows</span><span class="token punctuation">(</span>rowsDict<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>dataInfo<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">private</span> <span class="token class-name">Object</span> <span class="token function">invert</span><span class="token punctuation">(</span><span class="token class-name">Object</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">filedName</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> obj<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">filedName</span><span class="token punctuation">(</span><span class="token class-name">Object</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> aClass <span class="token operator">=</span> obj<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Field</span><span class="token punctuation">[</span><span class="token punctuation">]</span> declaredFields <span class="token operator">=</span> aClass<span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Field</span> declaredField <span class="token operator">:</span> declaredFields<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            declaredField<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>declaredField<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token class-name">Dict</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                <span class="token keyword">continue</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token class-name">String</span> fieldName <span class="token operator">=</span> declaredField<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token class-name">Dict</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fieldName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">try</span> <span class="token punctuation">{</span>
-                <span class="token class-name">Object</span> fieldValue <span class="token operator">=</span> declaredField<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>fieldValue<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                    <span class="token class-name">Dict</span> dict <span class="token operator">=</span> declaredField<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token class-name">Dict</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">String</span> dictName <span class="token operator">=</span> dict<span class="token punctuation">.</span><span class="token function">fieldName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">String</span> code <span class="token operator">=</span>dictName<span class="token operator">+</span><span class="token string">":"</span><span class="token operator">+</span>fieldValue<span class="token punctuation">;</span>
-                    <span class="token class-name">String</span> dictCode <span class="token operator">=</span> <span class="token class-name">InitData</span><span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span>dictCode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                        fieldValue <span class="token operator">=</span>dictCode<span class="token punctuation">;</span>
-                        declaredField<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span>fieldValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">}</span>
-                <span class="token punctuation">}</span>
-
-            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IllegalAccessException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> <span class="token function">convertList</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> rows<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>rows<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Object</span> row <span class="token operator">:</span> rows<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token function">filedName</span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> rows<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="五-安装jenkinx"><a href="#五-安装jenkinx" class="headerlink" title="五.安装jenkinx"></a>五.安装jenkinx</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://www.jenkins.io/download/">Jenkins download and deployment</a></p>
+<p>采用：war包下载</p>
+<p>运行：</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">nohup java -jar jenkins.war --httpPort=8383 &gt;my.file 2&gt;&amp;1 &amp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
                 
@@ -930,7 +786,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://macongmc.github.io/posts/715cdf7a.html">https://macongmc.github.io/posts/715cdf7a.html</a>
+                    <a href="https://macongmc.github.io/posts/cd651f5d.html">https://macongmc.github.io/posts/cd651f5d.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -968,12 +824,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/aop/">
-                                    <span class="chip bg-color">aop</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%B3%A8%E8%A7%A3/">
-                                    <span class="chip bg-color">注解</span>
+                                <a href="/tags/Jenkins/">
+                                    <span class="chip bg-color">Jenkins</span>
                                 </a>
                             
                         </div>
@@ -1445,49 +1297,47 @@ new Valine({
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/3594a379.html">
+                <a href="/posts/cd651f5d.html">
                     <div class="card-image">
                         
-                        <img src="https://ts1.cn.mm.bing.net/th/id/R-C.591f72671e5b803e2d136904d3327e04?rik=coqLcSD05U3fVQ&riu=http%3a%2f%2fcdn037.yun-img.com%2fstatic%2fupload%2fcngzlh%2fnews%2f20171019100636_92386.jpg&ehk=9HWiRIENwSQTtKAPDELTB58wpEYsffzspDihE3pRsY4%3d&risl=&pid=ImgRaw&r=0" class="responsive-img" alt="SDK集成IDEA">
+                        <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.CXnsm6LqYZbjlbyMZ2YrLAHaE7?pid=ImgDet&rs=1" class="responsive-img" alt="jenkisn(一）">
                         
-                        <span class="card-title">SDK集成IDEA</span>
+                        <span class="card-title">jenkisn(一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            春风得意马蹄疾，一日看尽长安花
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SDK/" class="post-category">
-                                    SDK
+                            <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/" class="post-category">
+                                    持续集成
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/sdk/">
-                        <span class="chip bg-color">sdk</span>
-                    </a>
-                    
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/Jenkins/">
+                        <span class="chip bg-color">Jenkins</span>
                     </a>
                     
                 </div>
@@ -1501,30 +1351,30 @@ new Valine({
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/b4458878.html">
+                <a href="/posts/4e543b07.html">
                     <div class="card-image">
                         
-                        <img src="https://img95.699pic.com/photo/50052/8798.jpg_wh860.jpg" class="responsive-img" alt="城市-省">
+                        <img src="https://x0.ifengimg.com/res/2021/B7C5600C9411BBD80833A9CCAC75DFEBD5993B33_size347_w1190_h643.jpeg" class="responsive-img" alt="Linux手册">
                         
-                        <span class="card-title">城市-省</span>
+                        <span class="card-title">Linux手册</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            春风得意马蹄疾，一日看尽长安花
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-12
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" class="post-category">
-                                    工具篇
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
                                 </a>
                             
                             
@@ -1534,8 +1384,12 @@ new Valine({
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%98%A0%E5%B0%84/">
-                        <span class="chip bg-color">映射</span>
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%A4%9A%E7%89%88%E6%9C%ACjdk/">
+                        <span class="chip bg-color">多版本jdk</span>
                     </a>
                     
                 </div>

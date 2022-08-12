@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://macongmc.github.io/posts/cd651f5d.html</loc>
+    
+    <lastmod>2022-08-12</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://macongmc.github.io/posts/4e543b07.html</loc>
     
     <lastmod>2022-08-12</lastmod>
@@ -563,6 +570,13 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://macongmc.github.io/tags/Jenkins/</loc>
+    <lastmod>2022-08-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -623,6 +637,13 @@
   
   <url>
     <loc>https://macongmc.github.io/categories/xxl-job/</loc>
+    <lastmod>2022-08-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://macongmc.github.io/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
     <lastmod>2022-08-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
