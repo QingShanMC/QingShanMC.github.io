@@ -675,14 +675,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    637
+                    748
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -786,6 +786,33 @@ else
     rm -rf /root/xxoo
 fi
 source /etc/profile<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Exec command:可以使用./go.sh</p>
+<pre class="line-numbers language-none"><code class="language-none">./go.sh  必须创建在~目录下
+可以传参  例如 ./go.sh demo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">appname =$1
+#获取参数
+echo "arg:$1"
+pid =`ps-ef |grep $1 | grep 'java-jar' | awk '{printf $2}'`
+echo $pid
+#如果pid为空，提示一下，否则kill
+if [ -z $pid ];
+#空值判断
+    then
+          echo "$appname not started"
+    eles
+           kill -9 $pid
+           #删除历史
+           rm  -rf xxoo
+           echo "$appname stoping....."
+pid =`ps -ef | grep -w $pid | grep java `
+if [ -z $pid ];
+       then
+            echo "$appname pid:$pid is stop"
+       else
+            echo "$appname stop failed"
+fi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -1689,7 +1716,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">53k</span>&nbsp;字
+                class="white-color">53.1k</span>&nbsp;字
             
             
             
