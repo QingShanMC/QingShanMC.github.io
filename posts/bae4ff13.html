@@ -40,9 +40,9 @@
       s.parentNode.insertBefore(hm, s);
     })();
     </script>
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="青山" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="青山" type="application/atom+xml">
 </head>
 
 
@@ -737,31 +737,31 @@ save 900 1
 save 300 10
 save 60  1000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<img src="/posts/undefined/image-20220817181115089.png" class="" title="image-20220817181115089">
+<img src="/posts/bae4ff13/image-20220817181115089.png" class="" title="image-20220817181115089">
 
 <h3 id="2-RDB原理"><a href="#2-RDB原理" class="headerlink" title="2.RDB原理"></a>2.RDB原理</h3><p>RDB bgsave开始时会fork主进程得到子进程，子进程共享主进程的内存数据。完成fork后读取内存数据并写入RDB文件。</p>
-<img src="/posts/undefined/image-20220817182637366.png" class="" title="image-20220817182637366">
+<img src="/posts/bae4ff13/image-20220817182637366.png" class="" title="image-20220817182637366">
 
-<img src="/posts/undefined/image-20220817182916234.png" class="" title="image-20220817182916234">
+<img src="/posts/bae4ff13/image-20220817182916234.png" class="" title="image-20220817182916234">
 
 <h3 id="3-AOF"><a href="#3-AOF" class="headerlink" title="3.AOF"></a>3.AOF</h3><p>AOF：Redis处理的每一个写命令都会记录再AOF文件中，可以看做是命令日志文件。</p>
-<img src="/posts/undefined/image-20220817183341834.png" class="" title="image-20220817183341834">
+<img src="/posts/bae4ff13/image-20220817183341834.png" class="" title="image-20220817183341834">
 
-<h3 id=""><a href="#" class="headerlink" title=""></a><img src="/posts/undefined/image-20220817183414540.png" class="" title="image-20220817183414540"></h3><p>AOF频率：  主进程</p>
-<img src="/posts/undefined/image-20220817183454021.png" class="" title="image-20220817183454021">
+<h3 id=""><a href="#" class="headerlink" title=""></a><img src="/posts/bae4ff13/image-20220817183414540.png" class="" title="image-20220817183414540"></h3><p>AOF频率：  主进程</p>
+<img src="/posts/bae4ff13/image-20220817183454021.png" class="" title="image-20220817183454021">
 
-<img src="/posts/undefined/image-20220817183717261.png" class="" title="image-20220817183717261">
+<img src="/posts/bae4ff13/image-20220817183717261.png" class="" title="image-20220817183717261">
 
 <pre class="line-numbers language-none"><code class="language-none">执行 bgrewriteaof   压缩体积
 后台异步执行<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<img src="/posts/undefined/image-20220817184522557.png" class="" title="image-20220817184522557">
+<img src="/posts/bae4ff13/image-20220817184522557.png" class="" title="image-20220817184522557">
 
-<img src="/posts/undefined/image-20220817184729838.png" class="" title="image-20220817184729838">
+<img src="/posts/bae4ff13/image-20220817184729838.png" class="" title="image-20220817184729838">
 
 <p>触发重写机制</p>
 <p>两者之间的优缺点</p>
-<img src="/posts/undefined/image-20220817185050972.png" class="" title="image-20220817185050972">
+<img src="/posts/bae4ff13/image-20220817185050972.png" class="" title="image-20220817185050972">
 
 <p>redis和AOF结合使用</p>
 <p>AOF　</p>
