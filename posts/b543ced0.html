@@ -717,7 +717,7 @@
 <h3 id="2-MQ的应用场合"><a href="#2-MQ的应用场合" class="headerlink" title="2.MQ的应用场合"></a>2.MQ的应用场合</h3><p>① 生产者不需要从消费者处获得反馈。引入消息队列之前的直接调用，其接口的返回值应该为空，这才让明 明下层的动作还没做，上层却当成动作做完了继续往后走，即所谓异步成为了可能。</p>
 <p>② 容许短暂的不一致性。</p>
 <p>③ 确实是用了有效果。即解耦、提速、削峰这些方面的收益，超过加入MQ，管理MQ这些成本。</p>
-<h3 id="3-MQ产品"><a href="#3-MQ产品" class="headerlink" title="3.MQ产品"></a>3.MQ产品</h3><img src="/posts/undefined/image-20220825144445041.png" class="" title="image-20220825144445041">
+<h3 id="3-MQ产品"><a href="#3-MQ产品" class="headerlink" title="3.MQ产品"></a>3.MQ产品</h3><img src="/posts/b543ced0/image-20220825144445041.png" class="" title="image-20220825144445041">
 
 <h3 id="4-特点"><a href="#4-特点" class="headerlink" title="4.特点"></a>4.特点</h3><p>1.使用简单，功能强大</p>
 <p>2.跨语言</p>
@@ -726,9 +726,9 @@
 <p>5.spring boot 默认集成</p>
 <h3 id="5-工作模式"><a href="#5-工作模式" class="headerlink" title="5.工作模式"></a>5.工作模式</h3><p>RabbitMQ提供了6种模式：简单模式，work模式，Publish/Subscribe发布与订阅模式，<strong>Routing</strong>路由模式，<strong>Topics</strong>主题模式，RPC远程调用模式（远程调用，不太算MQ；暂不作介绍）；</p>
 <p>官网对应模式介绍：<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/getstarted.html">https://www.rabbitmq.com/getstarted.html</a></p>
-<img src="/posts/undefined/image-20220825145457725.png" class="" title="image-20220825145457725">
+<img src="/posts/b543ced0/image-20220825145457725.png" class="" title="image-20220825145457725">
 
-<h2 id="二-RabbitMQ工作原理"><a href="#二-RabbitMQ工作原理" class="headerlink" title="二.RabbitMQ工作原理"></a>二.RabbitMQ工作原理</h2><h3 id="1-重点："><a href="#1-重点：" class="headerlink" title="1.重点："></a>1.重点：</h3><img src="/posts/undefined/image-20220825145655285.png" class="" title="image-20220825145655285">
+<h2 id="二-RabbitMQ工作原理"><a href="#二-RabbitMQ工作原理" class="headerlink" title="二.RabbitMQ工作原理"></a>二.RabbitMQ工作原理</h2><h3 id="1-重点："><a href="#1-重点：" class="headerlink" title="1.重点："></a>1.重点：</h3><img src="/posts/b543ced0/image-20220825145655285.png" class="" title="image-20220825145655285">
 
 <p>http 三次握手 四次挥手 一个长连接</p>
 <p><strong>一个消费者监听“一个”“队列”</strong></p>
@@ -773,7 +773,7 @@
 </ol>
 </li>
 </ul>
-<img src="/posts/undefined/1565105223969.976e339d.png" class="" width="1565105223969">
+<img src="/posts/b543ced0/1565105223969.976e339d.png" class="" width="1565105223969">
 
 <h3 id="3-生产者流转过程说明"><a href="#3-生产者流转过程说明" class="headerlink" title="3.生产者流转过程说明"></a>3.生产者流转过程说明</h3><ol>
 <li>客户端与代理服务器Broker建立连接。会调用newConnection() 方法,这个方法会进一步封装Protocol Header 0-9-1 的报文头发送给Broker ，以此通知Broker 本次交互采用的是AMQPO-9-1 协议，紧接着Broker 返回Connection.Start 来建立连接，在连接的过程中涉及Connection.Start/.Start-OK 、Connection.Tune/.Tune-Ok ，Connection.Open/ .Open-Ok 这6 个命令的交互。</li>
@@ -794,7 +794,7 @@ http://localhost:15672/
 username:guest
 password:guest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="2-简单模式"><a href="#2-简单模式" class="headerlink" title="2.简单模式"></a>2.简单模式</h3><img src="/posts/undefined/image-20220825151134024.png" class="" title="image-20220825151134024">
+<h3 id="2-简单模式"><a href="#2-简单模式" class="headerlink" title="2.简单模式"></a>2.简单模式</h3><img src="/posts/b543ced0/image-20220825151134024.png" class="" title="image-20220825151134024">
 
 <p>依赖</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependencies<span class="token punctuation">&gt;</span></span>
@@ -940,17 +940,17 @@ password:guest<span aria-hidden="true" class="line-numbers-rows"><span></span><s
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<img src="/posts/undefined/image-20220825155847117.png" class="" title="image-20220825155847117">
+<img src="/posts/b543ced0/image-20220825155847117.png" class="" title="image-20220825155847117">
 
-<h3 id="3-工作队列模式"><a href="#3-工作队列模式" class="headerlink" title="3.工作队列模式"></a>3.工作队列模式</h3><img src="/posts/undefined/image-20220825155924309.png" class="" title="image-20220825155924309">
+<h3 id="3-工作队列模式"><a href="#3-工作队列模式" class="headerlink" title="3.工作队列模式"></a>3.工作队列模式</h3><img src="/posts/b543ced0/image-20220825155924309.png" class="" title="image-20220825155924309">
 
 <p><code>Work Queues</code>与入门程序的<code>简单模式</code>相比，多了一个或一些消费端，多个消费端共同消费同一个队列中的消息。</p>
 <p><strong>应用场景</strong>：对于 任务过重或任务较多情况使用工作队列可以提高任务处理的速度。</p>
 <p>生产者，多运行几次，观察连个消费者</p>
 <p>设置，消费者能启多份：</p>
-<img src="/posts/undefined/image-20220411210105591.b88f5e92.png" class="" title="image-20220411210105591">
+<img src="/posts/b543ced0/image-20220411210105591.b88f5e92.png" class="" title="image-20220411210105591">
 
-<h3 id="4-订阅发布模式类型（微博）"><a href="#4-订阅发布模式类型（微博）" class="headerlink" title="4. 订阅发布模式类型（微博）"></a>4. 订阅发布模式类型（微博）</h3><img src="/posts/undefined/1556014499573.535fc6ca.png" class="" width="1556014499573">
+<h3 id="4-订阅发布模式类型（微博）"><a href="#4-订阅发布模式类型（微博）" class="headerlink" title="4. 订阅发布模式类型（微博）"></a>4. 订阅发布模式类型（微博）</h3><img src="/posts/b543ced0/1556014499573.535fc6ca.png" class="" width="1556014499573">
 
 <p>前面2个案例中，只有3个角色：</p>
 <ul>
@@ -1260,7 +1260,7 @@ public class Consumer1 {
 <li>消息的发送方在 向 Exchange发送消息时，也必须指定消息的 <code>RoutingKey</code>。</li>
 <li>Exchange不再把消息交给每一个绑定的队列，而是根据消息的<code>Routing Key</code>进行判断，只有队列的<code>Routingkey</code>与消息的 <code>Routing key</code>完全一致，才会接收到消息</li>
 </ul>
-<img src="/posts/undefined/1556029284397.8f3e1d3c.png" class="" width="1556029284397">
+<img src="/posts/b543ced0/1556029284397.8f3e1d3c.png" class="" width="1556029284397">
 
 <p>图解：</p>
 <ul>
@@ -1566,9 +1566,9 @@ public class Consumer2 {
 <p><code>Topic</code>类型与<code>Direct</code>相比，都是可以根据<code>RoutingKey</code>把消息路由到不同的队列。只不过<code>Topic</code>类型<code>Exchange</code>可以让队列在绑定<code>Routing key</code> 的时候<strong>使用通配符</strong>！</p>
 <pre class="line-numbers language-none"><code class="language-none">Routingkey` 一般都是有一个或多个单词组成，多个单词之间以”.”分割，例如： `item.insert<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<img src="/posts/undefined/1556031362048.6cfc1105.png" class="" width="1556031362048">
+<img src="/posts/b543ced0/1556031362048.6cfc1105.png" class="" width="1556031362048">
 
-<img src="/posts/undefined/1556031519931.49fe6b22.png" class="" width="1556031519931">
+<img src="/posts/b543ced0/1556031519931.49fe6b22.png" class="" width="1556031519931">
 
 <p>图解：</p>
 <ul>
