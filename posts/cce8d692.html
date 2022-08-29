@@ -705,9 +705,9 @@
 <li>理解RabbitMQ 应用问题</li>
 <li>能够搭建RabbitMQ 集群</li>
 </ul>
-<img src="/posts/undefined/image-20200320230112442.9919b2e6-16615912546561.png" class="" title="image-20200320230112442">
+<img src="/posts/cce8d692/image-20200320230112442.9919b2e6-16615912546561.png" class="" title="image-20200320230112442">
 
-<h2 id="二-RabbitMQ-高级特性"><a href="#二-RabbitMQ-高级特性" class="headerlink" title="二. RabbitMQ 高级特性"></a>二. RabbitMQ 高级特性</h2><img src="/posts/undefined/image-20200616093631383.0e0db4ef-16615912878363.png" class="" title="image-20200616093631383">
+<h2 id="二-RabbitMQ-高级特性"><a href="#二-RabbitMQ-高级特性" class="headerlink" title="二. RabbitMQ 高级特性"></a>二. RabbitMQ 高级特性</h2><img src="/posts/cce8d692/image-20200616093631383.0e0db4ef-16615912878363.png" class="" title="image-20200616093631383">
 
 <h3 id="1-消息可靠性投递"><a href="#1-消息可靠性投递" class="headerlink" title="1.消息可靠性投递"></a>1.消息可靠性投递</h3><p>在使用 RabbitMQ 的时候，作为消息发送方希望杜绝任何消息丢失或者投递失败场景。RabbitMQ 为我们提供了两种方式用来控制消息的投递可靠性模式。</p>
 <ul>
@@ -817,9 +817,9 @@
     password<span class="token operator">:</span> guest
     publisher<span class="token operator">-</span>confirm<span class="token operator">-</span>type<span class="token operator">:</span> correlated   #开启确认模式<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<img src="/posts/undefined/image-20220827172222180.png" class="" title="image-20220827172222180">
+<img src="/posts/cce8d692/image-20220827172222180.png" class="" title="image-20220827172222180">
 
-<img src="/posts/undefined/image-20220827172442421.png" class="" title="image-20220827172442421">
+<img src="/posts/cce8d692/image-20220827172442421.png" class="" title="image-20220827172442421">
 
 <h4 id="（2）-return退回模式代码实现"><a href="#（2）-return退回模式代码实现" class="headerlink" title="（2） return退回模式代码实现"></a>（2） return退回模式代码实现</h4><p>回退模式： 当消息发送给Exchange后，Exchange路由到Queue失败是 才会执行 ReturnCallBack，具体实现如下：</p>
 <p>修改配置文件</p>
@@ -868,7 +868,7 @@ rabbitTemplate<span class="token punctuation">.</span><span class="token functio
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>成功无返回</p>
-<img src="/posts/undefined/image-20220827190000016.png" class="" title="image-20220827190000016">
+<img src="/posts/cce8d692/image-20220827190000016.png" class="" title="image-20220827190000016">
 
 <p>对于确认模式：</p>
 <ul>
@@ -920,9 +920,9 @@ rabbitTemplate<span class="token punctuation">.</span><span class="token functio
        <span class="token punctuation">}</span>
    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<img src="/posts/undefined/image-20220827192256540.png" class="" title="image-20220827192256540">
+<img src="/posts/cce8d692/image-20220827192256540.png" class="" title="image-20220827192256540">
 
-<img src="/posts/undefined/image-20220827192335128.png" class="" title="image-20220827192335128">
+<img src="/posts/cce8d692/image-20220827192335128.png" class="" title="image-20220827192335128">
 
 <p>消息的接收者也可使用普通类实现<code>ChannelAwareMessageListener</code>接口，重写方法完成，这种是直接全局性接收的。没有最好的，只有最合适的，根据项目情况选择全局接收还是单个类接收自己监听的。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token comment">/**
@@ -1017,7 +1017,7 @@ rabbitTemplate<span class="token punctuation">.</span><span class="token functio
 <p>也能用代码。</p>
 <p>TTL 全称 Time To Live（存活时间/过期时间）。当消息到达存活时间后，还没有被消费，会被自动清除。</p>
 <p>RabbitMQ可以对消息设置过期时间，也可以对整个队列（Queue）设置过期时间。</p>
-<img src="/posts/undefined/1569166173852.55444692.png" class="" width="1569166173852">
+<img src="/posts/cce8d692/1569166173852.55444692.png" class="" width="1569166173852">
 
 <p>设置队列的过期时间</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>amqp<span class="token punctuation">.</span>core<span class="token punctuation">.</span></span><span class="token class-name">Binding</span><span class="token punctuation">;</span>
@@ -1244,13 +1244,13 @@ rabbitTemplate<span class="token punctuation">.</span><span class="token functio
 <li><p>定时器（不优雅！）</p>
 </li>
 <li><p>延迟队列</p>
-<img src="/posts/undefined/1569168202661.c342efd8-16617675288583.png" class="" width="1569168202661">
+<img src="/posts/cce8d692/1569168202661.c342efd8-16617675288583.png" class="" width="1569168202661">
 
 </li>
 </ol>
 <p>注意：在RabbitMQ中并未提供延迟队列功能。</p>
 <p>但是可以使用：<strong>TTL+死信队列</strong> 组合实现延迟队列的效果。</p>
-<img src="/posts/undefined/1569168255196.be484518.png" class="" width="1569168255196">
+<img src="/posts/cce8d692/1569168255196.be484518.png" class="" width="1569168255196">
 
 <h2 id="gitee地址"><a href="#gitee地址" class="headerlink" title="gitee地址"></a>gitee地址</h2><p><a target="_blank" rel="noopener" href="https://gitee.com/macongxuexi/RabbitMQSenior.git">https://gitee.com/macongxuexi/RabbitMQSenior.git</a></p>
 
