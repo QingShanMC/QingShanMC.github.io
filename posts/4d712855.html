@@ -40,9 +40,9 @@
       s.parentNode.insertBefore(hm, s);
     })();
     </script>
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="青山" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="青山" type="application/atom+xml">
 </head>
 
 
@@ -675,14 +675,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -1002,6 +1002,66 @@ FROM employees,departments;<span aria-hidden="true" class="line-numbers-rows"><s
 <span class="token keyword">FROM</span> employees <span class="token keyword">JOIN</span> departments 
 <span class="token keyword">USING</span> <span class="token punctuation">(</span>department_id<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
+<p>状态的不同的个数</p>
+<p>COUNT(字段==状态 OR NULL)；</p>
+<h2 id="第五章-聚合函数"><a href="#第五章-聚合函数" class="headerlink" title="第五章 聚合函数"></a>第五章 聚合函数</h2><h3 id="1-聚合函数介绍"><a href="#1-聚合函数介绍" class="headerlink" title="1. 聚合函数介绍"></a>1. 聚合函数介绍</h3><p><strong>什么是聚合函数</strong></p>
+<p>聚合函数作用于一组数据，并对一组数据返回一个值。</p>
+<p><strong>AVG()</strong> </p>
+<p><strong>SUM()</strong> </p>
+<p><strong>MAX()</strong> </p>
+<p><strong>MIN()</strong> </p>
+<p><strong>COUNT()</strong></p>
+<h4 id="1-1AVG-SUM"><a href="#1-1AVG-SUM" class="headerlink" title="1.1AVG/SUM"></a>1.1AVG/SUM</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">AVG</span><span class="token punctuation">(</span>salary<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">SUM</span><span class="token punctuation">(</span>salary<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">107</span>
+<span class="token keyword">From</span> employees<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>字符串求和是0；</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token function">SUM</span><span class="token punctuation">(</span><span class="token keyword">CASE</span> STATE <span class="token keyword">WHEN</span> <span class="token string">'0'</span> <span class="token keyword">THEN</span> <span class="token number">1</span> <span class="token keyword">ELSE</span> <span class="token number">0</span> <span class="token keyword">END</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="1-2MAX-MIN"><a href="#1-2MAX-MIN" class="headerlink" title="1.2MAX/MIN"></a>1.2MAX/MIN</h4><p>适用于：数值，字符串，日期。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">MAX</span><span class="token punctuation">(</span>salary<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">MIN</span><span class="token punctuation">(</span>salary<span class="token punctuation">)</span> <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h4 id="1-3COUNT"><a href="#1-3COUNT" class="headerlink" title="1.3COUNT"></a>1.3COUNT</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token function">COUNT</span><span class="token punctuation">(</span>字段<span class="token operator">=</span><span class="token operator">=</span>状态 <span class="token operator">OR</span> <span class="token boolean">NULL</span><span class="token punctuation">)</span>；<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">COUNT(1);
+COUNT(*);
+#方式1：COUNT(1);
+#方式2：COUNT(*);
+#方式3;COUNT(字段);
+COUNT(1);=COUNT(*);&gt;COUNT(字段);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>控制过滤</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">SUM</span><span class="token punctuation">(</span>commission_pct<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token function">COUNT</span> <span class="token punctuation">(</span>IFNULL<span class="token punctuation">(</span>commission_pct<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>终极写法AVG(IFNULL)</strong></p>
+<h3 id="2-GROUP-BY"><a href="#2-GROUP-BY" class="headerlink" title="2.GROUP BY"></a>2.GROUP BY</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">GROUP</span> <span class="token keyword">BY</span> ID<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>没有id的自己成一组；</p>
+<h3 id="3-HAVING"><a href="#3-HAVING" class="headerlink" title="3.HAVING"></a>3.HAVING</h3><p>\1. 行已经被分组。</p>
+<p>\2. 使用了聚合函数。</p>
+<p>\3. 满足HAVING 子句中条件的分组将被显示。</p>
+<p>\4. HAVING 不能单独使用，必须要跟 GROUP BY 一起使用。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> department_id<span class="token punctuation">,</span> <span class="token function">MAX</span><span class="token punctuation">(</span>salary<span class="token punctuation">)</span> <span class="token keyword">FROM</span> employees <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> department_id <span class="token keyword">HAVING</span> <span class="token function">MAX</span><span class="token punctuation">(</span>salary<span class="token punctuation">)</span><span class="token operator">&gt;</span><span class="token number">10000</span> <span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h3 id="4-SQL-底层原理"><a href="#4-SQL-底层原理" class="headerlink" title="4.SQL 底层原理"></a>4.SQL 底层原理</h3><p><strong>SELECT**</strong>的执行过程**</p>
+<h4 id="4-1-查询的结构"><a href="#4-1-查询的结构" class="headerlink" title="4.1 查询的结构"></a><strong>4.1</strong> <strong>查询的结构</strong></h4><img src="/posts/4d712855/image-20220914212157538.png" class="" title="image-20220914212157538">
+
+<h4 id="4-2顺序"><a href="#4-2顺序" class="headerlink" title="4.2顺序"></a>4.2顺序</h4><p><strong>关键字的顺序是不能颠倒的：</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">FROM</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">WHERE</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">HAVING</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">LIMIT</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> 
+
+<span class="token keyword">FROM</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token keyword">WHERE</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token keyword">HAVING</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> 的字段 <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token keyword">DISTINCT</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token keyword">LIMIT</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="4-3执行原理"><a href="#4-3执行原理" class="headerlink" title="4.3执行原理"></a>4.3执行原理</h4><p>FROM </p>
+<p>ON</p>
+<p>GROUP</p>
+<p>HAVING</p>
+<p>SELECT</p>
+<p>DISTINCT</p>
+<p>ORDER BY</p>
+<p>LIMIT</p>
 
                 
             </div>
@@ -1867,7 +1927,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">71.8k</span>&nbsp;字
+                class="white-color">72.1k</span>&nbsp;字
             
             
             
