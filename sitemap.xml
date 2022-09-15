@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://macongmc.github.io/posts/9982416a.html</loc>
+    
+    <lastmod>2022-09-15</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://macongmc.github.io/posts/4d712855.html</loc>
     
     <lastmod>2022-09-07</lastmod>
@@ -675,6 +682,13 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://macongmc.github.io/tags/mysql/</loc>
+    <lastmod>2022-09-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -805,6 +819,13 @@
   
   <url>
     <loc>https://macongmc.github.io/categories/sql/</loc>
+    <lastmod>2022-09-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://macongmc.github.io/categories/mysql/</loc>
     <lastmod>2022-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
