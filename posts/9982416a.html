@@ -675,14 +675,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    11 分
                 </div>
                 
 
@@ -1075,6 +1075,122 @@ deimiter <span class="token punctuation">;</span><span aria-hidden="true" class=
 set optimizer_trace_max_mem_size=1000000;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <img src="/posts/9982416a/image-20220917124735525.png" class="" title="image-20220917124735525">
+
+<h2 id="MySQL高级-day3"><a href="#MySQL高级-day3" class="headerlink" title="MySQL高级-day3"></a>MySQL高级-day3</h2><h3 id="1-应用优化"><a href="#1-应用优化" class="headerlink" title="1.应用优化"></a>1.应用优化</h3><p>前面章节，我们介绍很多数据库优化措施。</p>
+<h4 id="1-1使用连接池"><a href="#1-1使用连接池" class="headerlink" title="1.1使用连接池"></a>1.1使用连接池</h4><p>频繁的创建关闭连接，是比较耗费资源，我们有必要建立数据库连接池，以提高访问性能。</p>
+<p>c3p0,druid</p>
+<h4 id="1-2减少MySQL的访问"><a href="#1-2减少MySQL的访问" class="headerlink" title="1.2减少MySQL的访问"></a>1.2减少MySQL的访问</h4><h5 id="1-2-1避免数据重复检索"><a href="#1-2-1避免数据重复检索" class="headerlink" title="1.2.1避免数据重复检索"></a>1.2.1避免数据重复检索</h5><p>在编写应用代码时，需要能够理清对数据库的访问逻辑。</p>
+<img src="/posts/9982416a/image-20220918102831470.png" class="" title="image-20220918102831470">
+
+<h5 id="1-2-2增加cache层"><a href="#1-2-2增加cache层" class="headerlink" title="1.2.2增加cache层"></a>1.2.2增加cache层</h5><p>使用持久化框架的一级或二及缓存，或者Redis中。</p>
+<h4 id="1-3负载均衡"><a href="#1-3负载均衡" class="headerlink" title="1.3负载均衡"></a>1.3负载均衡</h4><h5 id="1-3-1利用MySQL复制分流查询"><a href="#1-3-1利用MySQL复制分流查询" class="headerlink" title="1.3.1利用MySQL复制分流查询"></a>1.3.1利用MySQL复制分流查询</h5><p>通过MySQL的主从复制，实现读写分离，使增删改操作走主节点，查询操作走从节点，从而可以降低单台服务器的读写压力。</p>
+<img src="/posts/9982416a/image-20220918103252338.png" class="" title="image-20220918103252338">
+
+<h5 id="1-3-2采用分布式数据架构"><a href="#1-3-2采用分布式数据架构" class="headerlink" title="1.3.2采用分布式数据架构"></a>1.3.2采用分布式数据架构</h5><p>分布式数据库架构适合大数据量，负载高的情况，它有良好的拓展性和高可用性。通过在多台服务器之间分布数据，可以实现多台服务器之间的负载均衡，提高访问效率。</p>
+<h3 id="2-Mysql中查询缓存优化"><a href="#2-Mysql中查询缓存优化" class="headerlink" title="2.Mysql中查询缓存优化"></a>2.Mysql中查询缓存优化</h3><h4 id="2-1概述"><a href="#2-1概述" class="headerlink" title="2.1概述"></a>2.1概述</h4><p>开启Mysql的查询缓存，当执行完全相同的SQL语句的时候，服务器就会直接从缓存中读取结构，当数据被修改，之前的缓存会失效，修改比较频繁的表不适合做查询缓存。</p>
+<h4 id="2-2操作流程"><a href="#2-2操作流程" class="headerlink" title="2.2操作流程"></a>2.2操作流程</h4><img src="/posts/9982416a/image-20220918104145812.png" class="" title="image-20220918104145812">
+
+<h4 id="2-3查询缓存配置"><a href="#2-3查询缓存配置" class="headerlink" title="2.3查询缓存配置"></a>2.3查询缓存配置</h4><p>1.查看当前的MySQL数据库是否支持查询缓存：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'have_query_cache'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/posts/9982416a/image-20220918104453139.png" class="" title="image-20220918104453139">
+
+<p>2.查看当前MySQL是否开启了查询缓存：</p>
+<pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">SHOW VARIABLES LIKE 'query_cache_type';<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/posts/9982416a/image-20220918104604002.png" class="" title="image-20220918104604002">
+
+<p>3.查看查询缓存的占用大小：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SHOW</span> VATIABLES <span class="token operator">LIKE</span> <span class="token string">'query_cache_size'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/posts/9982416a/image-20220918104731356.png" class="" title="image-20220918104731356">
+
+<p>4.查询查询缓存的状态变量：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SHOW</span> <span class="token keyword">STATUS</span> <span class="token operator">LIKE</span> <span class="token string">'Qcache%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/posts/9982416a/image-20220918105123142.png" class="" title="image-20220918105123142">
+
+<img src="/posts/9982416a/image-20220918105346298.png" class="" title="image-20220918105346298">
+
+<h4 id="2-4开启查询缓存"><a href="#2-4开启查询缓存" class="headerlink" title="2.4开启查询缓存"></a>2.4开启查询缓存</h4><p>MySQL查询缓存默认是关闭的，需要手动配置参数query_cache_type,来开启查询缓存，query_cache_type该参数的可能取值有三个：</p>
+<img src="/posts/9982416a/image-20220918105642882.png" class="" title="image-20220918105642882">
+
+<img src="/posts/9982416a/image-20220918105701312.png" class="" title="image-20220918105701312">
+
+<h4 id="2-5查询缓存SELECT选型"><a href="#2-5查询缓存SELECT选型" class="headerlink" title="2.5查询缓存SELECT选型"></a>2.5查询缓存SELECT选型</h4><p>可以在SELECT语句中指定两个与查询查询缓存相关的选型：</p>
+<p>SQL_CACHE:如果查询结果是可缓存的，并且query_cache_type系统变量是ON或者DEMANE，则缓存结果。</p>
+<p>SQL_NO_CACHE:服务器不使用查询缓存。它既不检查查询缓存，也不检测结果是否以缓存，也不缓存查询结果。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> SQL_CACHE id<span class="token punctuation">,</span>name <span class="token keyword">FROM</span> cuntomer<span class="token punctuation">;</span>
+<span class="token keyword">SELECT</span> SQL_NO_CACHE id<span class="token punctuation">,</span>name <span class="token keyword">FROM</span> cuntomer<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="2-6查询缓存失效的情况"><a href="#2-6查询缓存失效的情况" class="headerlink" title="2.6查询缓存失效的情况"></a>2.6查询缓存失效的情况</h4><img src="/posts/9982416a/image-20220918111105530.png" class="" title="image-20220918111105530">
+
+<h3 id="3-Mysql内存管理优化"><a href="#3-Mysql内存管理优化" class="headerlink" title="3.Mysql内存管理优化"></a>3.Mysql内存管理优化</h3><h4 id="3-1内存优化原则"><a href="#3-1内存优化原则" class="headerlink" title="3.1内存优化原则"></a>3.1内存优化原则</h4><img src="/posts/9982416a/image-20220918111816424.png" class="" title="image-20220918111816424">
+
+<h4 id="3-2MyISAM内存优化"><a href="#3-2MyISAM内存优化" class="headerlink" title="3.2MyISAM内存优化"></a>3.2MyISAM内存优化</h4><img src="/posts/9982416a/image-20220918111830874.png" class="" title="image-20220918111830874">
+
+<img src="/posts/9982416a/image-20220918112210941.png" class="" title="image-20220918112210941">
+
+<h4 id="3-3InnoDB内存优化"><a href="#3-3InnoDB内存优化" class="headerlink" title="3.3InnoDB内存优化"></a>3.3InnoDB内存优化</h4><img src="/posts/9982416a/image-20220918112428525.png" class="" title="image-20220918112428525">
+
+<h3 id="4-Mysql并发参数调整"><a href="#4-Mysql并发参数调整" class="headerlink" title="4.Mysql并发参数调整"></a>4.Mysql并发参数调整</h3><img src="/posts/9982416a/image-20220918112743738.png" class="" title="image-20220918112743738">
+
+<img src="/posts/9982416a/image-20220918113302009.png" class="" title="image-20220918113302009">
+
+<img src="/posts/9982416a/image-20220918113350416.png" class="" title="image-20220918113350416">
+
+<h3 id="5-Mysql锁问题"><a href="#5-Mysql锁问题" class="headerlink" title="5.Mysql锁问题"></a>5.Mysql锁问题</h3><h4 id="51锁概述"><a href="#51锁概述" class="headerlink" title="51锁概述"></a>51锁概述</h4><p>锁是计算机协调多个进程或线程并发访问某一资源的机制。</p>
+<h4 id="5-2锁分类"><a href="#5-2锁分类" class="headerlink" title="5.2锁分类"></a>5.2锁分类</h4><p>操作粒度：</p>
+<p>1.表锁</p>
+<p>2.行锁</p>
+<p>操作类型：</p>
+<p>1.读锁（共享锁）</p>
+<p>2.写锁（排它锁）</p>
+<h4 id="5-3MySQL锁"><a href="#5-3MySQL锁" class="headerlink" title="5.3MySQL锁"></a>5.3MySQL锁</h4><img src="/posts/9982416a/image-20220918174145034.png" class="" title="image-20220918174145034">
+
+<h4 id="5-2MyISAM表锁"><a href="#5-2MyISAM表锁" class="headerlink" title="5..2MyISAM表锁"></a>5..2MyISAM表锁</h4><p>MyISAM存储引擎只支持表锁。</p>
+<h5 id="5-2-1如何加表锁"><a href="#5-2-1如何加表锁" class="headerlink" title="5.2.1如何加表锁"></a>5.2.1如何加表锁</h5><img src="/posts/9982416a/image-20220918174544641.png" class="" title="image-20220918174544641">
+
+<h5 id="5-2-2读锁案例"><a href="#5-2-2读锁案例" class="headerlink" title="5.2.2读锁案例"></a>5.2.2读锁案例</h5><h5 id="5-2-3写锁案例"><a href="#5-2-3写锁案例" class="headerlink" title="5.2.3写锁案例"></a>5.2.3写锁案例</h5><img src="/posts/9982416a/image-20220918175742810.png" class="" title="image-20220918175742810">
+
+
+
+<h5 id="5-2-45结论"><a href="#5-2-45结论" class="headerlink" title="5.2.45结论"></a>5.2.45结论</h5><img src="/posts/9982416a/image-20220918180154240.png" class="" title="image-20220918180154240">
+
+<h5 id="5-2-查看锁的争用情况"><a href="#5-2-查看锁的争用情况" class="headerlink" title="5.2.查看锁的争用情况"></a>5.2.查看锁的争用情况</h5><img src="/posts/9982416a/image-20220918180420409.png" class="" title="image-20220918180420409">
+
+<img src="/posts/9982416a/image-20220918180647382.png" class="" title="image-20220918180647382">
+
+<h4 id="5-3InnoDB锁问题"><a href="#5-3InnoDB锁问题" class="headerlink" title="5.3InnoDB锁问题"></a>5.3InnoDB锁问题</h4><h5 id="5-3-1行锁介绍"><a href="#5-3-1行锁介绍" class="headerlink" title="5.3.1行锁介绍"></a>5.3.1行锁介绍</h5><img src="/posts/9982416a/image-20220918181139440.png" class="" title="image-20220918181139440">
+
+<h5 id="5-3-2背景知识"><a href="#5-3-2背景知识" class="headerlink" title="5.3.2背景知识"></a>5.3.2背景知识</h5><img src="/posts/9982416a/image-20220918181337039.png" class="" title="image-20220918181337039">
+
+<img src="/posts/9982416a/image-20220918181430900.png" class="" title="image-20220918181430900">
+
+<img src="/posts/9982416a/image-20220918181648223.png" class="" title="image-20220918181648223">
+
+<h5 id="5-3-3InoDB行锁的模式"><a href="#5-3-3InoDB行锁的模式" class="headerlink" title="5.3.3InoDB行锁的模式"></a>5.3.3InoDB行锁的模式</h5><img src="/posts/9982416a/image-20220918181831336.png" class="" title="image-20220918181831336">
+
+<h5 id="5-3-4案例准备工作"><a href="#5-3-4案例准备工作" class="headerlink" title="5.3.4案例准备工作"></a>5.3.4案例准备工作</h5><img src="/posts/9982416a/image-20220918182037781.png" class="" title="image-20220918182037781">
+
+<h5 id="5-3-5行锁基本演示"><a href="#5-3-5行锁基本演示" class="headerlink" title="5.3.5行锁基本演示"></a>5.3.5行锁基本演示</h5><img src="/posts/9982416a/image-20220918182144974.png" class="" title="image-20220918182144974">
+
+<h5 id="5-3-6无索引行锁升级为表锁"><a href="#5-3-6无索引行锁升级为表锁" class="headerlink" title="5.3.6无索引行锁升级为表锁"></a>5.3.6无索引行锁升级为表锁</h5><img src="/posts/9982416a/image-20220918182758522.png" class="" title="image-20220918182758522">
+
+<h5 id="5-3-7间隙锁危害"><a href="#5-3-7间隙锁危害" class="headerlink" title="5.3.7间隙锁危害"></a>5.3.7间隙锁危害</h5><img src="/posts/9982416a/image-20220918183301246.png" class="" title="image-20220918183301246">
+
+<h5 id="5-3-8InnoDB行锁争用情况"><a href="#5-3-8InnoDB行锁争用情况" class="headerlink" title="5.3.8InnoDB行锁争用情况"></a>5.3.8InnoDB行锁争用情况</h5><img src="/posts/9982416a/image-20220918184040390.png" class="" title="image-20220918184040390">
+
+<h5 id="5-3-9总结"><a href="#5-3-9总结" class="headerlink" title="5.3.9总结"></a>5.3.9总结</h5><img src="/posts/9982416a/image-20220918184102215.png" class="" title="image-20220918184102215">
+
+<h3 id="6-常用SQL技巧"><a href="#6-常用SQL技巧" class="headerlink" title="6.常用SQL技巧"></a>6.常用SQL技巧</h3><h4 id="6-1SQL执行顺序"><a href="#6-1SQL执行顺序" class="headerlink" title="6.1SQL执行顺序"></a>6.1SQL执行顺序</h4><img src="/posts/9982416a/image-20220918184237954.png" class="" title="image-20220918184237954">
+
+<img src="/posts/9982416a/image-20220918184323659.png" class="" title="image-20220918184323659">
+
+<h4 id="6-2正则表达式使用"><a href="#6-2正则表达式使用" class="headerlink" title="6.2正则表达式使用"></a>6.2正则表达式使用</h4><img src="/posts/9982416a/image-20220918184446644.png" class="" title="image-20220918184446644">
+
 
                 
             </div>
@@ -1938,7 +2054,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">74.8k</span>&nbsp;字
+                class="white-color">75.7k</span>&nbsp;字
             
             
             
