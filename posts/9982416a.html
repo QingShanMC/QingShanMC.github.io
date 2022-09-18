@@ -40,9 +40,9 @@
       s.parentNode.insertBefore(hm, s);
     })();
     </script>
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="个人笔记" type="application/atom+xml">
-
+<meta name="generator" content="Hexo 5.2.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="个人笔记" type="application/atom+xml">
 </head>
 
 
@@ -1081,23 +1081,19 @@ set optimizer_trace_max_mem_size=1000000;<span aria-hidden="true" class="line-nu
 <p>A. 根据ID查询 </p>
 <pre class="line-numbers language-none"><code class="language-none">select * from tb_item where id = 1999\G;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="../../../%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80/Mysql%E9%AB%98%E7%BA%A7/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/day-02/%E6%96%87%E6%A1%A3/assets/1553261992653.png" alt="1553261992653"> </p>
 <p>查询速度很快， 接近0s ， 主要的原因是因为id为主键， 有索引；</p>
-<p><img src="../../../%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80/Mysql%E9%AB%98%E7%BA%A7/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/day-02/%E6%96%87%E6%A1%A3/assets/1553262044466.png" alt="1553262044466"> </p>
 <p>2). 根据 title 进行精确查询</p>
 <pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">select * from tb_item where title = 'iphoneX 移动3G 32G941'\G; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="../../../%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80/Mysql%E9%AB%98%E7%BA%A7/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/day-02/%E6%96%87%E6%A1%A3/assets/1553262215900.png" alt="1553262215900"> </p>
-<p>查看SQL语句的执行计划 ： </p>
-<p><img src="../../../%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80/Mysql%E9%AB%98%E7%BA%A7/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/day-02/%E6%96%87%E6%A1%A3/assets/1553262469785.png" alt="1553262469785"> </p>
+
+
 <p>处理方案 ， 针对title字段， 创建索引 ： </p>
 <pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">create index idx_item_title on tb_item(title);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="../../../%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80/Mysql%E9%AB%98%E7%BA%A7/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/day-02/%E6%96%87%E6%A1%A3/assets/1553263229523.png" alt="1553263229523"> </p>
+
+
 <p>索引创建完成之后，再次进行查询 ： </p>
-<p><img src="../../../%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80/Mysql%E9%AB%98%E7%BA%A7/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/day-02/%E6%96%87%E6%A1%A3/assets/1553263302706.png" alt="1553263302706"> </p>
 <p>通过explain ， 查看执行计划，执行SQL时使用了刚才创建的索引 </p>
-<p><img src="../../../%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80/Mysql%E9%AB%98%E7%BA%A7/%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/day-02/%E6%96%87%E6%A1%A3/assets/1553263355262.png" alt="1553263355262"> </p>
 <h4 id="4-2-索引的使用"><a href="#4-2-索引的使用" class="headerlink" title="4.2 索引的使用"></a>4.2 索引的使用</h4><h5 id="4-2-1-准备环境"><a href="#4-2-1-准备环境" class="headerlink" title="4.2.1 准备环境"></a>4.2.1 准备环境</h5><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>tb_seller<span class="token punctuation">`</span> <span class="token punctuation">(</span>
 	<span class="token punctuation">`</span>sellerid<span class="token punctuation">`</span> <span class="token keyword">varchar</span> <span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 	<span class="token punctuation">`</span>name<span class="token punctuation">`</span> <span class="token keyword">varchar</span> <span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
