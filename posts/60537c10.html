@@ -675,14 +675,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    3.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    14 分
                 </div>
                 
 
@@ -1050,6 +1050,253 @@ networks:
 <p>Run <code>docker-compose</code> to bring up the cluster:</p>
 <pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">docker-compose up<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<h2 id="5-RestAPI"><a href="#5-RestAPI" class="headerlink" title="5.RestAPI"></a>5.RestAPI</h2><h3 id="1-创建索引库"><a href="#1-创建索引库" class="headerlink" title="1.创建索引库"></a>1.创建索引库</h3><p>代码分为三步：</p>
+<ul>
+<li>1）创建Request对象。因为是创建索引库的操作，因此Request是CreateIndexRequest。</li>
+<li>2）添加请求参数，其实就是DSL的JSON参数部分。因为json字符串很长，这里是定义了静态字符串常量MAPPING_TEMPLATE，让代码看起来更加优雅。</li>
+<li>3）发送请求，client.indices()方法的返回值是IndicesClient类型，封装了所有与索引库操作有关的方法。</li>
+</ul>
+<p>代码示例</p>
+<p>在hotel-demo的cn.itcast.hotel.constants包下，创建一个类，定义mapping映射的JSON字符串常量：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">cn<span class="token punctuation">.</span>itcast<span class="token punctuation">.</span>hotel<span class="token punctuation">.</span>constants</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HotelConstants</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> MAPPING_TEMPLATE <span class="token operator">=</span> <span class="token string">"{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"  \"mappings\": {\n"</span> <span class="token operator">+</span>
+            <span class="token string">"    \"properties\": {\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"id\": {\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"keyword\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"name\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"text\",\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"analyzer\": \"ik_max_word\",\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"copy_to\": \"all\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"address\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"keyword\",\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"index\": false\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"price\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"integer\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"score\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"integer\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"brand\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"keyword\",\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"copy_to\": \"all\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"city\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"keyword\",\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"copy_to\": \"all\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"starName\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"keyword\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"business\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"keyword\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"location\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"geo_point\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"pic\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"keyword\",\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"index\": false\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      },\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      \"all\":{\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"type\": \"text\",\n"</span> <span class="token operator">+</span>
+            <span class="token string">"        \"analyzer\": \"ik_max_word\"\n"</span> <span class="token operator">+</span>
+            <span class="token string">"      }\n"</span> <span class="token operator">+</span>
+            <span class="token string">"    }\n"</span> <span class="token operator">+</span>
+            <span class="token string">"  }\n"</span> <span class="token operator">+</span>
+            <span class="token string">"}"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>单元测试</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+     * 创建索引
+     * @throws IOException
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">createIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+        <span class="token comment">//1.创建Request</span>
+        <span class="token class-name">CreateIndexRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CreateIndexRequest</span><span class="token punctuation">(</span><span class="token string">"hotel"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.准备DSL语句</span>
+        request<span class="token punctuation">.</span><span class="token function">source</span><span class="token punctuation">(</span><span class="token class-name">HotelConstants</span><span class="token punctuation">.</span>MAPPING_TEMPLATE<span class="token punctuation">,</span> <span class="token class-name">XContentType</span><span class="token punctuation">.</span>JSON<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//3.发送请求</span>
+        restClient<span class="token punctuation">.</span><span class="token function">indices</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token class-name">RequestOptions</span><span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-删除索引库"><a href="#2-删除索引库" class="headerlink" title="2.删除索引库"></a>2.删除索引库</h3><p>以代码的差异，注意体现在Request对象上。依然是三步走：</p>
+<ul>
+<li>1）创建Request对象。这次是DeleteIndexRequest对象</li>
+<li>2）准备参数。这里是无参</li>
+<li>3）发送请求。改用delete方法</li>
+</ul>
+<p>代码示例</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+     * 删除索引
+     * @throws IOException
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">deleteIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+        <span class="token comment">//1.创建Request</span>
+        <span class="token class-name">DeleteIndexRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DeleteIndexRequest</span><span class="token punctuation">(</span><span class="token string">"hotel"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.发送请求</span>
+        restClient<span class="token punctuation">.</span><span class="token function">indices</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span><span class="token class-name">RequestOptions</span><span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-判断索引库是否存在"><a href="#3-判断索引库是否存在" class="headerlink" title="3.判断索引库是否存在"></a>3.判断索引库是否存在</h3><p>因此与删除的Java代码流程是类似的。依然是三步走：</p>
+<ul>
+<li>1）创建Request对象。这次是GetIndexRequest对象</li>
+<li>2）准备参数。这里是无参</li>
+<li>3）发送请求。改用exists方法</li>
+</ul>
+<p>代码示例</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+     * 检测索引是否存在
+     * @throws IOException
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">existIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+        <span class="token comment">//1.创建Request</span>
+        <span class="token class-name">GetIndexRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetIndexRequest</span><span class="token punctuation">(</span><span class="token string">"hotel"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.发送请求</span>
+        <span class="token keyword">boolean</span> exists <span class="token operator">=</span> restClient<span class="token punctuation">.</span><span class="token function">indices</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">exists</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token class-name">RequestOptions</span><span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>exists<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p>JavaRestClient操作elasticsearch的流程基本类似。核心是client.indices()方法来获取索引库的操作对象。</p>
+<p>索引库操作的基本步骤：</p>
+<ul>
+<li>初始化RestHighLevelClient</li>
+<li>创建XxxIndexRequest。XXX是Create、Get、Delete</li>
+<li>准备DSL（ Create时需要，其它是无参）</li>
+<li>发送请求。调用RestHighLevelClient#indices().xxx()方法，xxx是create、exists、delete</li>
+</ul>
+<h2 id="6-RestClient操作文档"><a href="#6-RestClient操作文档" class="headerlink" title="6.RestClient操作文档"></a>6.RestClient操作文档</h2><h3 id="1-新增文档"><a href="#1-新增文档" class="headerlink" title="1.新增文档"></a>1.新增文档</h3><p>可以看到与创建索引库类似，同样是三步走：</p>
+<ul>
+<li>1）创建Request对象</li>
+<li>2）准备请求参数，也就是DSL中的JSON文档</li>
+<li>3）发送请求</li>
+</ul>
+<p>变化的地方在于，这里直接使用client.xxx()的API，不再需要client.indices()了。</p>
+<p>代码示例</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">void</span> <span class="token function">testAddDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1.根据id查询酒店数据</span>
+    <span class="token class-name">Hotel</span> hotel <span class="token operator">=</span> hotelService<span class="token punctuation">.</span><span class="token function">getById</span><span class="token punctuation">(</span><span class="token number">61083L</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 2.转换为文档类型</span>
+    <span class="token class-name">HotelDoc</span> hotelDoc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HotelDoc</span><span class="token punctuation">(</span>hotel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 3.将HotelDoc转json</span>
+    <span class="token class-name">String</span> json <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>hotelDoc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 1.准备Request对象</span>
+    <span class="token class-name">IndexRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">IndexRequest</span><span class="token punctuation">(</span><span class="token string">"hotel"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">id</span><span class="token punctuation">(</span>hotelDoc<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 2.准备Json文档</span>
+    request<span class="token punctuation">.</span><span class="token function">source</span><span class="token punctuation">(</span>json<span class="token punctuation">,</span> <span class="token class-name">XContentType</span><span class="token punctuation">.</span>JSON<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 3.发送请求</span>
+    client<span class="token punctuation">.</span><span class="token function">index</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token class-name">RequestOptions</span><span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-查询文档"><a href="#2-查询文档" class="headerlink" title="2.查询文档"></a>2.查询文档</h3><p>非常简单，因此代码大概分两步：</p>
+<ul>
+<li>准备Request对象</li>
+<li>发送请求</li>
+</ul>
+<p>代码示例</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">void</span> <span class="token function">testGetDocumentById</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1.准备Request</span>
+    <span class="token class-name">GetRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetRequest</span><span class="token punctuation">(</span><span class="token string">"hotel"</span><span class="token punctuation">,</span> <span class="token string">"61082"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 2.发送请求，得到响应</span>
+    <span class="token class-name">GetResponse</span> response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token class-name">RequestOptions</span><span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 3.解析响应结果</span>
+    <span class="token class-name">String</span> json <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">getSourceAsString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token class-name">HotelDoc</span> hotelDoc <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">parseObject</span><span class="token punctuation">(</span>json<span class="token punctuation">,</span> <span class="token class-name">HotelDoc</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>hotelDoc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-删除文档"><a href="#3-删除文档" class="headerlink" title="3.删除文档"></a>3.删除文档</h3><ul>
+<li>1）准备Request对象，因为是删除，这次是DeleteRequest对象。要指定索引库名和id</li>
+<li>2）准备参数，无参</li>
+<li>3）发送请求。因为是删除，所以是client.delete()方法</li>
+</ul>
+<p>代码示例</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">void</span> <span class="token function">testDeleteDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1.准备Request</span>
+    <span class="token class-name">DeleteRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DeleteRequest</span><span class="token punctuation">(</span><span class="token string">"hotel"</span><span class="token punctuation">,</span> <span class="token string">"61083"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 2.发送请求</span>
+    client<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token class-name">RequestOptions</span><span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-修改文档"><a href="#4-修改文档" class="headerlink" title="4.修改文档"></a>4.修改文档</h3><p>修改我们讲过两种方式：</p>
+<ul>
+<li>全量修改：本质是先根据id删除，再新增</li>
+<li>增量修改：修改文档中的指定字段值</li>
+</ul>
+<p>在RestClient的API中，全量修改与新增的API完全一致，判断依据是ID：</p>
+<ul>
+<li>如果新增时，ID已经存在，则修改</li>
+<li>如果新增时，ID不存在，则新增</li>
+</ul>
+<p>之前类似，也是三步走：</p>
+<ul>
+<li>1）准备Request对象。这次是修改，所以是UpdateRequest</li>
+<li>2）准备参数。也就是JSON文档，里面包含要修改的字段</li>
+<li>3）更新文档。这里调用client.update()方法</li>
+</ul>
+<p>代码示例</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">void</span> <span class="token function">testUpdateDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1.准备Request</span>
+    <span class="token class-name">UpdateRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UpdateRequest</span><span class="token punctuation">(</span><span class="token string">"hotel"</span><span class="token punctuation">,</span> <span class="token string">"61083"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 2.准备请求参数</span>
+    request<span class="token punctuation">.</span><span class="token function">doc</span><span class="token punctuation">(</span>
+        <span class="token string">"price"</span><span class="token punctuation">,</span> <span class="token string">"952"</span><span class="token punctuation">,</span>
+        <span class="token string">"starName"</span><span class="token punctuation">,</span> <span class="token string">"四钻"</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 3.发送请求</span>
+    client<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token class-name">RequestOptions</span><span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-批量导入文档"><a href="#5-批量导入文档" class="headerlink" title="5.批量导入文档"></a>5.批量导入文档</h3><p>其实还是三步走：</p>
+<ul>
+<li>1）创建Request对象。这里是BulkRequest</li>
+<li>2）准备参数。批处理的参数，就是其它Request对象，这里就是多个IndexRequest</li>
+<li>3）发起请求。这里是批处理，调用的方法为client.bulk()方法</li>
+</ul>
+<p>代码示例</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">void</span> <span class="token function">testBulkRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 批量查询酒店数据</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Hotel</span><span class="token punctuation">&gt;</span></span> hotels <span class="token operator">=</span> hotelService<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 1.创建Request</span>
+    <span class="token class-name">BulkRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BulkRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 2.准备参数，添加多个新增的Request</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Hotel</span> hotel <span class="token operator">:</span> hotels<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 2.1.转换为文档类型HotelDoc</span>
+        <span class="token class-name">HotelDoc</span> hotelDoc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HotelDoc</span><span class="token punctuation">(</span>hotel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 2.2.创建新增文档的Request对象</span>
+        request<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">IndexRequest</span><span class="token punctuation">(</span><span class="token string">"hotel"</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">id</span><span class="token punctuation">(</span>hotelDoc<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">source</span><span class="token punctuation">(</span>JSON<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>hotelDoc<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">XContentType</span><span class="token punctuation">.</span>JSON<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 3.发送请求</span>
+    client<span class="token punctuation">.</span><span class="token function">bulk</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token class-name">RequestOptions</span><span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6.总结"></a>6.总结</h3><p>文档操作的基本步骤：</p>
+<ul>
+<li>初始化RestHighLevelClient</li>
+<li>创建XxxRequest。XXX是Index、Get、Update、Delete、Bulk</li>
+<li>准备参数（Index、Update、Bulk时需要）</li>
+<li>发送请求。调用RestHighLevelClient#.xxx()方法，xxx是index、get、update、delete、bulk</li>
+<li>解析结果（Get时需要）</li>
+</ul>
 
                 
             </div>
@@ -1915,7 +2162,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">94.8k</span>&nbsp;字
+                class="white-color">96.2k</span>&nbsp;字
             
             
             
