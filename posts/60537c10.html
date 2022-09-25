@@ -700,12 +700,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="安装elasticsearch"><a href="#安装elasticsearch" class="headerlink" title="安装elasticsearch"></a>安装elasticsearch</h1><h1 id="1-部署单点es"><a href="#1-部署单点es" class="headerlink" title="1.部署单点es"></a>1.部署单点es</h1><h2 id="1-1-创建网络"><a href="#1-1-创建网络" class="headerlink" title="1.1.创建网络"></a>1.1.创建网络</h2><p>因为我们还需要部署kibana容器，因此需要让es和kibana容器互联。这里先创建一个网络：</p>
+                <h2 id="安装elasticsearch"><a href="#安装elasticsearch" class="headerlink" title="安装elasticsearch"></a>安装elasticsearch</h2><h2 id="1-部署单点es"><a href="#1-部署单点es" class="headerlink" title="1.部署单点es"></a>1.部署单点es</h2><h3 id="1-1-创建网络"><a href="#1-1-创建网络" class="headerlink" title="1.1.创建网络"></a>1.1.创建网络</h3><p>因为我们还需要部署kibana容器，因此需要让es和kibana容器互联。这里先创建一个网络：</p>
 <pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">docker network create es-net<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
-<h2 id="1-2-加载镜像"><a href="#1-2-加载镜像" class="headerlink" title="1.2.加载镜像"></a>1.2.加载镜像</h2><p>这里我们采用elasticsearch的7.12.1版本的镜像，这个镜像体积非常大，接近1G。不建议大家自己pull。</p>
+<h3 id="1-2-加载镜像"><a href="#1-2-加载镜像" class="headerlink" title="1.2.加载镜像"></a>1.2.加载镜像</h3><p>这里我们采用elasticsearch的7.12.1版本的镜像，这个镜像体积非常大，接近1G。不建议大家自己pull。</p>
 <p>课前资料提供了镜像的tar包：</p>
 <img src="/posts/60537c10/image-20210510165308064-16640759421571.png" class="" title="image-20210510165308064">
 
@@ -714,7 +714,7 @@
 docker load -i es.tar<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>同理还有<code>kibana</code>的tar包也需要这样做。</p>
-<h2 id="1-3-运行"><a href="#1-3-运行" class="headerlink" title="1.3.运行"></a>1.3.运行</h2><p>运行docker命令，部署单点es：</p>
+<h3 id="1-3-运行"><a href="#1-3-运行" class="headerlink" title="1.3.运行"></a>1.3.运行</h3><p>运行docker命令，部署单点es：</p>
 <pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">docker run -d \
 	--name es \
     -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
@@ -747,8 +747,8 @@ elasticsearch:7.12.1<span aria-hidden="true" class="line-numbers-rows"><span></s
 
 
 
-<h1 id="2-部署kibana"><a href="#2-部署kibana" class="headerlink" title="2.部署kibana"></a>2.部署kibana</h1><p>kibana可以给我们提供一个elasticsearch的可视化界面，便于我们学习。</p>
-<h2 id="2-1-部署"><a href="#2-1-部署" class="headerlink" title="2.1.部署"></a>2.1.部署</h2><p>运行docker命令，部署kibana</p>
+<h2 id="2-部署kibana"><a href="#2-部署kibana" class="headerlink" title="2.部署kibana"></a>2.部署kibana</h2><p>kibana可以给我们提供一个elasticsearch的可视化界面，便于我们学习。</p>
+<h3 id="2-1-部署"><a href="#2-1-部署" class="headerlink" title="2.1.部署"></a>2.1.部署</h3><p>运行docker命令，部署kibana</p>
 <pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">docker run -d \
 --name kibana \
 -e ELASTICSEARCH_HOSTS=http://192.168.200.141:9200 \
@@ -768,11 +768,11 @@ kibana:7.12.1<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 <img src="/posts/60537c10/image-20210109105135812.png" class="" title="image-20210109105135812">
 
 <p>此时，在浏览器输入地址访问：<a href="http://192.168.150.101:5601，即可看到结果">http://192.168.150.101:5601，即可看到结果</a></p>
-<h2 id="2-2-DevTools"><a href="#2-2-DevTools" class="headerlink" title="2.2.DevTools"></a>2.2.DevTools</h2><p>kibana中提供了一个DevTools界面：</p>
+<h3 id="2-2-DevTools"><a href="#2-2-DevTools" class="headerlink" title="2.2.DevTools"></a>2.2.DevTools</h3><p>kibana中提供了一个DevTools界面：</p>
 <img src="/posts/60537c10/image-20210506102630393.png" class="" title="image-20210506102630393">
 
 <p>这个界面中可以编写DSL来操作elasticsearch。并且对DSL语句有自动补全功能。</p>
-<h1 id="3-安装IK分词器"><a href="#3-安装IK分词器" class="headerlink" title="3.安装IK分词器"></a>3.安装IK分词器</h1><h2 id="3-1-在线安装ik插件（较慢）"><a href="#3-1-在线安装ik插件（较慢）" class="headerlink" title="3.1.在线安装ik插件（较慢）"></a>3.1.在线安装ik插件（较慢）</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 进入容器内部
+<h2 id="3-安装IK分词器"><a href="#3-安装IK分词器" class="headerlink" title="3.安装IK分词器"></a>3.安装IK分词器</h2><h3 id="3-1-在线安装ik插件（较慢）"><a href="#3-1-在线安装ik插件（较慢）" class="headerlink" title="3.1.在线安装ik插件（较慢）"></a>3.1.在线安装ik插件（较慢）</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 进入容器内部
 docker exec -it elasticsearch /bin/bash
 
 # 在线下载并安装
@@ -783,7 +783,7 @@ exit
 #重启容器
 docker restart elasticsearch<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="3-2-离线安装ik插件（推荐）"><a href="#3-2-离线安装ik插件（推荐）" class="headerlink" title="3.2.离线安装ik插件（推荐）"></a>3.2.离线安装ik插件（推荐）</h2><h3 id="1）查看数据卷目录"><a href="#1）查看数据卷目录" class="headerlink" title="1）查看数据卷目录"></a>1）查看数据卷目录</h3><p>安装插件需要知道elasticsearch的plugins目录位置，而我们用了数据卷挂载，因此需要查看elasticsearch的数据卷目录，通过下面命令查看:</p>
+<h3 id="3-2-离线安装ik插件（推荐）"><a href="#3-2-离线安装ik插件（推荐）" class="headerlink" title="3.2.离线安装ik插件（推荐）"></a>3.2.离线安装ik插件（推荐）</h3><h3 id="1）查看数据卷目录"><a href="#1）查看数据卷目录" class="headerlink" title="1）查看数据卷目录"></a>1）查看数据卷目录</h3><p>安装插件需要知道elasticsearch的plugins目录位置，而我们用了数据卷挂载，因此需要查看elasticsearch的数据卷目录，通过下面命令查看:</p>
 <pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">docker volume inspect es-plugins<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>显示结果：</p>
@@ -900,7 +900,7 @@ docker logs -f es<span aria-hidden="true" class="line-numbers-rows"><span></span
 
 
 
-<h2 id="3-3-扩展词词典"><a href="#3-3-扩展词词典" class="headerlink" title="3.3 扩展词词典"></a>3.3 扩展词词典</h2><p>随着互联网的发展，“造词运动”也越发的频繁。出现了很多新的词语，在原有的词汇列表中并不存在。比如：“奥力给”，“传智播客” 等。</p>
+<h3 id="3-3-扩展词词典"><a href="#3-3-扩展词词典" class="headerlink" title="3.3 扩展词词典"></a>3.3 扩展词词典</h3><p>随着互联网的发展，“造词运动”也越发的频繁。出现了很多新的词语，在原有的词汇列表中并不存在。比如：“奥力给”，“传智播客” 等。</p>
 <p>所以我们的词汇也需要不断的更新，IK分词器提供了扩展词汇的功能。</p>
 <p>1）打开IK分词器config目录：</p>
 <img src="/posts/60537c10/image-20210506112225508.png" class="" title="image-20210506112225508">
@@ -937,7 +937,7 @@ docker logs -f elasticsearch<span aria-hidden="true" class="line-numbers-rows"><
 <blockquote>
 <p>注意当前文件的编码必须是 UTF-8 格式，严禁使用Windows记事本编辑</p>
 </blockquote>
-<h2 id="3-4-停用词词典"><a href="#3-4-停用词词典" class="headerlink" title="3.4 停用词词典"></a>3.4 停用词词典</h2><p>在互联网项目中，在网络间传输的速度很快，所以很多语言是不允许在网络上传递的，如：关于宗教、政治等敏感词语，那么我们在搜索时也应该忽略当前词汇。</p>
+<h3 id="3-4-停用词词典"><a href="#3-4-停用词词典" class="headerlink" title="3.4 停用词词典"></a>3.4 停用词词典</h3><p>在互联网项目中，在网络间传输的速度很快，所以很多语言是不允许在网络上传递的，如：关于宗教、政治等敏感词语，那么我们在搜索时也应该忽略当前词汇。</p>
 <p>IK分词器也提供了强大的停用词功能，让我们在索引时就直接忽略当前的停用词汇表中的内容。</p>
 <p>1）IKAnalyzer.cfg.xml配置文件内容添加：</p>
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
@@ -972,7 +972,7 @@ docker logs -f elasticsearch<span aria-hidden="true" class="line-numbers-rows"><
 <blockquote>
 <p>注意当前文件的编码必须是 UTF-8 格式，严禁使用Windows记事本编辑</p>
 </blockquote>
-<h1 id="4-部署es集群"><a href="#4-部署es集群" class="headerlink" title="4.部署es集群"></a>4.部署es集群</h1><p>部署es集群可以直接使用docker-compose来完成，不过要求你的Linux虚拟机至少有<strong>4G</strong>的内存空间</p>
+<h2 id="4-部署es集群"><a href="#4-部署es集群" class="headerlink" title="4.部署es集群"></a>4.部署es集群</h2><p>部署es集群可以直接使用docker-compose来完成，不过要求你的Linux虚拟机至少有<strong>4G</strong>的内存空间</p>
 <p>首先编写一个docker-compose文件，内容如下：</p>
 <pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">version: '2.2'
 services:
