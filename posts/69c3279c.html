@@ -675,7 +675,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    175
+                    275
                 </div>
                 
 
@@ -700,7 +700,10 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一-上传代码步骤"><a href="#一-上传代码步骤" class="headerlink" title="一.上传代码步骤"></a>一.上传代码步骤</h2><h3 id="1-代码编写完毕-添加到暂存区"><a href="#1-代码编写完毕-添加到暂存区" class="headerlink" title="1.代码编写完毕  添加到暂存区"></a>1.代码编写完毕  添加到暂存区</h3><img src="/posts/69c3279c/image-20220901095201594.png" class="" title="image-20220901095201594">
+                <h2 id="一-上传代码步骤"><a href="#一-上传代码步骤" class="headerlink" title="一.上传代码步骤"></a>一.上传代码步骤</h2><h3 id="1-代码编写完毕-添加到暂存区"><a href="#1-代码编写完毕-添加到暂存区" class="headerlink" title="1.代码编写完毕  添加到暂存区"></a>1.代码编写完毕  添加到暂存区</h3><pre class="line-numbers language-none"><code class="language-none">git add xx;
+git stash;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="/posts/69c3279c/image-20220901095201594.png" class="" title="image-20220901095201594">
 
 <img src="/posts/69c3279c/image-20220901095211968.png" class="" title="image-20220901095211968">
 
@@ -709,6 +712,10 @@
 <h3 id="3-释放暂存区"><a href="#3-释放暂存区" class="headerlink" title="3.释放暂存区"></a>3.释放暂存区</h3><img src="/posts/69c3279c/image-20220901095429858.png" class="" title="image-20220901095429858">
 
 <p>如果和线上有代码冲突，在此处解决冲突。</p>
+<pre class="line-numbers language-none"><code class="language-none">git pop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
 <h3 id="4-提交代码"><a href="#4-提交代码" class="headerlink" title="4.提交代码"></a>4.提交代码</h3><img src="/posts/69c3279c/image-20220901095510689.png" class="" title="image-20220901095510689">
 
 <h3 id="5-提交到远程自己的分支"><a href="#5-提交到远程自己的分支" class="headerlink" title="5.提交到远程自己的分支"></a>5.提交到远程自己的分支</h3><img src="/posts/69c3279c/image-20220901095539194.png" class="" title="image-20220901095539194">
@@ -731,6 +738,34 @@
 <p>git remote add origin <code>http://localhost/study/study_project.git</code></p>
 <p>修改后</p>
 <p>git remote add origin <code>http://username:password@localhost/study/study_project.git</code></p>
+<h2 id="四-命令总结"><a href="#四-命令总结" class="headerlink" title="四.命令总结"></a>四.命令总结</h2><p>添加到暂存区</p>
+<pre class="line-numbers language-none"><code class="language-none">git add xx;
+git stash;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>更新本地代码</p>
+<pre class="line-numbers language-none"><code class="language-none">git pull origin xx;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>释放暂存区</p>
+<pre class="line-numbers language-none"><code class="language-none">git stash pop;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>解决冲突后</p>
+<p>提交代码</p>
+<pre class="line-numbers language-none"><code class="language-none">git commit -am 'xxx'<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>合并成一条commit</p>
+<pre class="line-numbers language-none"><code class="language-none">
+git log 
+git rebase -i xxx
+改成s  
+保存
+编辑  注释<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>刷新到远程分支</p>
+<pre class="line-numbers language-none"><code class="language-none">git push origin xxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>审视错误代码   重新合并</p>
+<pre class="line-numbers language-none"><code class="language-none">git push -f origin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 
                 
             </div>
@@ -1594,7 +1629,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">97.1k</span>&nbsp;字
+                class="white-color">97.2k</span>&nbsp;字
             
             
             
