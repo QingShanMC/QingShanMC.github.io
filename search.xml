@@ -4,31 +4,6 @@
   
     
     <entry>
-      <title>maven</title>
-      <link href="posts/c6e613d8.html"/>
-      <url>posts/c6e613d8.html</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="maven-常见命令"><a href="#maven-常见命令" class="headerlink" title="maven 常见命令"></a>maven 常见命令</h1><h2 id="1-指定配置文件路径"><a href="#1-指定配置文件路径" class="headerlink" title="1.指定配置文件路径"></a>1.指定配置文件路径</h2><pre class="line-numbers language-none"><code class="language-none">mvn clean install --settings=/o/maven-config/settings.xm;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="2-强制"><a href="#2-强制" class="headerlink" title="2.强制"></a>2.强制</h2><pre class="line-numbers language-none"><code class="language-none">mvn -U<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="3-换配置文件"><a href="#3-换配置文件" class="headerlink" title="3.换配置文件"></a>3.换配置文件</h2><img src="/posts/c6e613d8/image-20221028110258110.png" class="" title="image-20221028110258110">]]></content>
-      
-      
-      <categories>
-          
-          <category> mvn </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> mvn </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>elasticsearch</title>
       <link href="posts/60537c10.html"/>
       <url>posts/60537c10.html</url>
