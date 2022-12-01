@@ -675,7 +675,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    285
+                    316
                 </div>
                 
 
@@ -738,7 +738,10 @@ git stash;<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 <p>git remote add origin <code>http://localhost/study/study_project.git</code></p>
 <p>修改后</p>
 <p>git remote add origin <code>http://username:password@localhost/study/study_project.git</code></p>
-<h2 id="四-命令总结"><a href="#四-命令总结" class="headerlink" title="四.命令总结"></a>四.命令总结</h2><p>添加到暂存区</p>
+<h2 id="四-命令总结"><a href="#四-命令总结" class="headerlink" title="四.命令总结"></a>四.命令总结</h2><p>切换远程分支</p>
+<pre class="line-numbers language-none"><code class="language-none">git checkout -b 本地分支名 origin/远程分支名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>添加到暂存区</p>
 <pre class="line-numbers language-none"><code class="language-none">git add xx;
 git stash;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -754,6 +757,9 @@ git merge origin/master mc-dev<span aria-hidden="true" class="line-numbers-rows"
 <p>解决冲突后</p>
 <p>提交代码</p>
 <pre class="line-numbers language-none"><code class="language-none">git commit -am 'xxx'<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>获取另外分支的commit</p>
+<pre class="line-numbers language-none"><code class="language-none">git cherry-pick<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>合并成一条commit</p>
 <pre class="line-numbers language-none"><code class="language-none">
