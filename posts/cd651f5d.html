@@ -510,7 +510,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://tse3-mm.cn.bing.net/th/id/OIP-C.CXnsm6LqYZbjlbyMZ2YrLAHaE7?pid=ImgDet&rs=1')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=3830720015,3772898188&fm=253&fmt=auto?w=1422&h=800')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -707,17 +707,17 @@
 <p>百度网盘<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1UybyZL9fg4aWBZQLAbzHrA">https://pan.baidu.com/s/1UybyZL9fg4aWBZQLAbzHrA</a></p>
 <p>提取码：7777</p>
 <p>解压两个JDK</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tar zxvf jdk-8u181-linux-x64.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">tar</span> zxvf jdk-8u181-linux-x64.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>设置环境变量</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">vim <span class="token operator">/</span>etc<span class="token operator">/</span>profile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>配置</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export JAVA_HOME=/usr/local/jdk/jdk1.8.0_181
-export CLASSPATH=$:CLASSPATH:$JAVA_HOME/lib/
-export PATH=$PATH:$JAVA_HOME/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">export</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span>/usr/local/jdk/jdk1.8.0_181
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CLASSPATH</span><span class="token operator">=</span>$:CLASSPATH:<span class="token variable">$JAVA_HOME</span>/lib/
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span><span class="token builtin class-name">:</span><span class="token variable">$JAVA_HOME</span>/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">source /etc/profile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">source</span> /etc/profile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>1.8设置为默认JDK</p>
 <h3 id="2-多版本配置"><a href="#2-多版本配置" class="headerlink" title="2.多版本配置"></a>2.多版本配置</h3><p>查看JDK是否存在</p>
@@ -729,38 +729,38 @@ export PATH=$PATH:$JAVA_HOME/bin<span aria-hidden="true" class="line-numbers-row
 
 <h2 id="三-安装maven"><a href="#三-安装maven" class="headerlink" title="三.安装maven"></a>三.安装maven</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
 <p>解压</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tar zxvf apache-maven-3.8.6-bin.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">tar</span> zxvf apache-maven-3.8.6-bin.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>修改仓库</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">vi <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>maven<span class="token operator">/</span>apache<span class="token operator">-</span>maven<span class="token operator">-</span><span class="token number">3.6</span><span class="token number">.1</span><span class="token operator">/</span>conf<span class="token operator">/</span>settings<span class="token punctuation">.</span>xml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>配置阿里云镜像</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">&lt;mirror&gt;
-	&lt;id&gt;alimaven&lt;/id&gt;
-	&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
-	&lt;name&gt;aliyun maven&lt;/name&gt;
-	&lt;url&gt;http://maven.aliyun.com/nexus/content/repositories/central/&lt;/url&gt;
-&lt;/mirror&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token operator">&lt;</span>mirror<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>id<span class="token operator">&gt;</span>alimaven<span class="token operator">&lt;</span>/id<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>mirrorOf<span class="token operator">&gt;</span>central<span class="token operator">&lt;</span>/mirrorOf<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>aliyun maven<span class="token operator">&lt;</span>/name<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>url<span class="token operator">&gt;</span>http://maven.aliyun.com/nexus/content/repositories/central/<span class="token operator">&lt;</span>/url<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>/mirror<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>配置环境变量</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export MAVEN_HOME=/usr/local/maven/apache-maven-3.6.1
-export PATH=$PATH:$MAVEN_HOME/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">export</span> <span class="token assign-left variable">MAVEN_HOME</span><span class="token operator">=</span>/usr/local/maven/apache-maven-3.6.1
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span><span class="token builtin class-name">:</span><span class="token variable">$MAVEN_HOME</span>/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>赋权限</p>
 <pre class="line-numbers language-none"><code class="language-none">chmod 777 /usr/local/maven/apache-maven-3.6.1/bin/mvn<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>刷新运行</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">source /etc/profile
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">source</span> /etc/profile
 mvn-v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h2 id="四-安装git"><a href="#四-安装git" class="headerlink" title="四.安装git"></a>四.安装git</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yum -y install git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="四-安装git"><a href="#四-安装git" class="headerlink" title="四.安装git"></a>四.安装git</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yum -y <span class="token function">install</span> <span class="token function">git</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">git version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="五-安装jenkinx"><a href="#五-安装jenkinx" class="headerlink" title="五.安装jenkinx"></a>五.安装jenkinx</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://www.jenkins.io/download/">Jenkins download and deployment</a></p>
 <p>采用：war包下载</p>
 <p>运行：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">nohup java -jar jenkins.war --httpPort=8383 &gt;my.file 2&gt;&amp;1 &amp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">nohup</span> java -jar jenkins.war --httpPort<span class="token operator">=</span><span class="token number">8383</span> <span class="token operator">&gt;</span>my.file <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如有空指针</p>
 <pre class="line-numbers language-none"><code class="language-none">yum -y install fontconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1309,7 +1309,7 @@ new Valine({
                 <a href="/posts/47427259.html">
                     <div class="card-image">
                         
-                        <img src="https://img.tukuppt.com/bg_grid/00/45/12/d4Zn0beBSo.jpg!/fh/350" class="responsive-img" alt="jenkins(二）">
+                        <img src="https://img1.baidu.com/it/u=3371919403,1718695777&fm=253&fmt=auto?w=889&h=500" class="responsive-img" alt="jenkins(二）">
                         
                         <span class="card-title">jenkins(二）</span>
                     </div>
@@ -1357,7 +1357,7 @@ new Valine({
                 <a href="/posts/4e543b07.html">
                     <div class="card-image">
                         
-                        <img src="https://x0.ifengimg.com/res/2021/B7C5600C9411BBD80833A9CCAC75DFEBD5993B33_size347_w1190_h643.jpeg" class="responsive-img" alt="Linux手册">
+                        <img src="https://img0.baidu.com/it/u=1488594902,3727268786&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" class="responsive-img" alt="Linux手册">
                         
                         <span class="card-title">Linux手册</span>
                     </div>
