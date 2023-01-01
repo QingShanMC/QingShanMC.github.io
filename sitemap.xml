@@ -72,13 +72,6 @@
   </url>
   
   <url>
-    <loc>https://macongmc.github.io/posts/3512ea66.html</loc>
-    
-    <lastmod>2022-08-24</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://macongmc.github.io/posts/bae4ff13.html</loc>
     
     <lastmod>2022-08-17</lastmod>
@@ -676,20 +669,6 @@
   </url>
   
   <url>
-    <loc>https://macongmc.github.io/tags/%E5%BE%AE%E4%BF%A1/</loc>
-    <lastmod>2023-01-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://macongmc.github.io/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/</loc>
-    <lastmod>2023-01-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://macongmc.github.io/tags/git/</loc>
     <lastmod>2023-01-01</lastmod>
     <changefreq>daily</changefreq>
@@ -805,13 +784,6 @@
   
   <url>
     <loc>https://macongmc.github.io/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
-    <lastmod>2023-01-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://macongmc.github.io/categories/%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3/</loc>
     <lastmod>2023-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
