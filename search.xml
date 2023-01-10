@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Linux</title>
+      <link href="posts/53d0684b.html"/>
+      <url>posts/53d0684b.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><pre class="line-numbers language-none"><code class="language-none">ll  查看文件列表ll -lrt 文件列表按时间排序grep -rl ERROR 查看错误日志view 查看日志shift +G 到最后一页Ctrl + f：向下翻页快捷键(下一页)Ctrl + b：向上翻页快捷键(上一页)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title> SpringSecurity</title>
       <link href="posts/f383a83d.html"/>
       <url>posts/f383a83d.html</url>
