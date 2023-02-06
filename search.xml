@@ -29,31 +29,6 @@
     
     
     <entry>
-      <title> SpringSecurity</title>
-      <link href="posts/f383a83d.html"/>
-      <url>posts/f383a83d.html</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="一-Spring-Security的认证方式"><a href="#一-Spring-Security的认证方式" class="headerlink" title="一.Spring Security的认证方式"></a>一.Spring Security的认证方式</h2><p>认证: 所谓的认证，就是用来判断系统中是否存在某用户，并判断该用户的身份是否合法的过程，解决的其实是用户登录的问题。认证的存在，是为了保护系统中的隐私数据与资源，只有合法的用户才可以访问系统中的资源。</p><p>在Spring Security中，常见的认证方式可以分为HTTP层面和表单层面，常见的认证方式如下:</p><ul><li><p>①. HTTP基本认证；</p></li><li><p>②. Form表单认证</p></li><li><p>③. HTTP摘要认证；</p></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 安全框架 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag>  SpringSecurity </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>elasticsearch</title>
       <link href="posts/60537c10.html"/>
       <url>posts/60537c10.html</url>
