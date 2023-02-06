@@ -675,7 +675,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    162
+                    196
                 </div>
                 
 
@@ -739,6 +739,14 @@ view 查看日志
 shift +G 到最后一页
 Ctrl + f：向下翻页快捷键(下一页)
 Ctrl + b：向上翻页快捷键(上一页)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>关闭防火墙</p>
+<pre class="line-numbers language-none"><code class="language-none"># 关闭
+systemctl stop firewalld
+# 禁止开机启动防火墙
+systemctl disable firewalld
+#查看是否关闭防火墙
+systemctl status firewalld<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 
@@ -1603,7 +1611,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">93.4k</span>&nbsp;字
+                class="white-color">93.7k</span>&nbsp;字
             
             
             
