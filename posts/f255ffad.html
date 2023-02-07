@@ -40,9 +40,9 @@
       s.parentNode.insertBefore(hm, s);
     })();
     </script>
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="个人笔记" type="application/atom+xml">
-
+<meta name="generator" content="Hexo 5.2.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="个人笔记" type="application/atom+xml">
 </head>
 
 
@@ -675,14 +675,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -732,6 +732,17 @@ sed -i 's/download.docker.com/mirrors.aliyun.com\/docker-ce/g' /etc/yum.repos.d/
 # 启动docker、设置开机自启
 [root@localhost ~]# systemctl start docker
 [root@localhost ~]# systemctl enable docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>设置镜像</p>
+<pre class="line-numbers language-none"><code class="language-none">yum-config-manager \
+    --add-repo \
+    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+    
+sed -i 's/download.docker.com/mirrors.aliyun.com\/docker-ce/g' /etc/yum.repos.d/docker-ce.repo
+
+yum makecache fast<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
 
 <h3 id="1-2配置镜像加速"><a href="#1-2配置镜像加速" class="headerlink" title="1.2配置镜像加速"></a>1.2配置镜像加速</h3><p>创建文件夹</p>
 <pre class="line-numbers language-none"><code class="language-none">sudo mkdir -p /etc/docker<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -901,6 +912,22 @@ docker run -d -p 8080:8080 --name tomcat1 tomcat:8<span aria-hidden="true" class
 
 <p>再次刷新</p>
 <img src="/posts/f255ffad/image-20230206110632273.png" class="" title="image-20230206110632273">
+
+<h2 id="四-安装mysql"><a href="#四-安装mysql" class="headerlink" title="四. 安装mysql"></a>四. 安装mysql</h2><p>拉取镜像</p>
+<pre class="line-numbers language-none"><code class="language-none">docker pull mysql:5.7<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>run</p>
+<pre class="line-numbers language-none"><code class="language-none">docker run --name mysql --restart=always -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/posts/f255ffad/image-20230207170207221.png" class="" title="image-20230207170207221">
+
+<h2 id="五-安装redis"><a href="#五-安装redis" class="headerlink" title="五. 安装redis"></a>五. 安装redis</h2><p>拉取镜像</p>
+<pre class="line-numbers language-none"><code class="language-none">docker pull redis<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>run</p>
+<pre class="line-numbers language-none"><code class="language-none">docker run --name redis  --restart=always -p 6379:6379 -d redis --requirepass "123456" //启动Redis<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/posts/f255ffad/image-20230207170616163.png" class="" title="image-20230207170616163">
 
                 
             </div>
@@ -1766,7 +1793,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">95.1k</span>&nbsp;字
+                class="white-color">95.2k</span>&nbsp;字
             
             
             
