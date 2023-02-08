@@ -675,14 +675,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    9 分
                 </div>
                 
 
@@ -928,6 +928,93 @@ docker run -d -p 8080:8080 --name tomcat1 tomcat:8<span aria-hidden="true" class
 <pre class="line-numbers language-none"><code class="language-none">docker run --name redis  --restart=always -p 6379:6379 -d redis --requirepass "123456" //启动Redis<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/posts/f255ffad/image-20230207170616163.png" class="" title="image-20230207170616163">
+
+<h2 id="六-安装minio"><a href="#六-安装minio" class="headerlink" title="六. 安装minio"></a>六. 安装minio</h2><p>拉取</p>
+<pre class="line-numbers language-none"><code class="language-none">docker pull minio/minio<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>run</p>
+<pre class="line-numbers language-none"><code class="language-none">docker run -p 9000:9000 -p 9090:9090 \
+ --name minio \
+ -d --restart=always \
+ -e "MINIO_ACCESS_KEY=minioadmin" \
+ -e "MINIO_SECRET_KEY=minioadmin" \
+ -v /mydata/minio/data:/data \
+ minio/minio server \
+ /data --console-address ":9090" -address ":9000"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/posts/f255ffad/image-20230208153503501.png" class="" title="image-20230208153503501">
+
+<h2 id="七-安装ES和kibana"><a href="#七-安装ES和kibana" class="headerlink" title="七. 安装ES和kibana"></a>七. 安装ES和kibana</h2><p>拉取</p>
+<pre class="line-numbers language-none"><code class="language-none">docker pull elasticsearch:7.2.0
+docker pull kibana:7.2.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>run</p>
+<pre class="line-numbers language-none"><code class="language-none">docker run --name elasticsearch --restart always -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms200M -Xmx200M" -d elasticsearch:7.2.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/posts/f255ffad/image-20230208153930793.png" class="" title="image-20230208153930793">
+
+<p>解决es跨域问题</p>
+<pre class="line-numbers language-none"><code class="language-none">docker exec -it elasticsearch /bin/bash<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">vi config/elasticsearch.yml
+添加
+http.cors.enabled: true
+http.cors.allow-origin: "*"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>安装ik分词器</p>
+<pre class="line-numbers language-none"><code class="language-none">./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.2.0/elasticsearch-analysis-ik-7.2.0.zip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>重启</p>
+<pre class="line-numbers language-none"><code class="language-none">docker restart elasticsearch<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>测试</p>
+<pre class="line-numbers language-none"><code class="language-none">http://192.168.200.142:9200/_analyze<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">{
+  "analyzer": "ik_smart",
+  "text": "我是中国人"
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>结果</p>
+<pre class="line-numbers language-none"><code class="language-none">{
+    "tokens": [
+        {
+            "token": "我",
+            "start_offset": 0,
+            "end_offset": 1,
+            "type": "CN_CHAR",
+            "position": 0
+        },
+        {
+            "token": "是",
+            "start_offset": 1,
+            "end_offset": 2,
+            "type": "CN_CHAR",
+            "position": 1
+        },
+        {
+            "token": "中国人",
+            "start_offset": 2,
+            "end_offset": 5,
+            "type": "CN_WORD",
+            "position": 2
+        }
+    ]
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>run</p>
+<pre class="line-numbers language-none"><code class="language-none">docker run --name kibana -e ELASTICSEARCH_URL=http://192.168.200.142:9200 -p 5601:5601 -d kibana:7.2.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改</p>
+<pre class="line-numbers language-none"><code class="language-none">docker exec -it kibana /bin/bash<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">vi /config/kibana.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>重启</p>
+<pre class="line-numbers language-none"><code class="language-none">docker restart kibana<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/posts/f255ffad/image-20230208155641119.png" class="" title="image-20230208155641119">
+
 
                 
             </div>
@@ -1793,7 +1880,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">95.2k</span>&nbsp;字
+                class="white-color">95.5k</span>&nbsp;字
             
             
             
