@@ -510,7 +510,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201707%2F09%2F20170709122256_B3aec.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1675180541&t=abecb3f52ec1451b7c50cccf5c95232b')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://konachan.net/jpeg/45adc0b7d050c32f04b8b3499780f5b3/Konachan.com%20-%20352584%20blush%20brown_hair%20butterfly%20chinese_clothes%20genshin_impact%20hat%20hu_tao_%28genshin_impact%29%20long_hair%20magic%20mitha%20moon%20red_eyes%20shorts%20signed%20wristwear.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -773,15 +773,15 @@ kibana:7.12.1<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 <img src="/posts/60537c10/image-20210506102630393.png" class="" title="image-20210506102630393">
 
 <p>这个界面中可以编写DSL来操作elasticsearch。并且对DSL语句有自动补全功能。</p>
-<h2 id="3-安装IK分词器"><a href="#3-安装IK分词器" class="headerlink" title="3.安装IK分词器"></a>3.安装IK分词器</h2><h3 id="3-1-在线安装ik插件（较慢）"><a href="#3-1-在线安装ik插件（较慢）" class="headerlink" title="3.1.在线安装ik插件（较慢）"></a>3.1.在线安装ik插件（较慢）</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 进入容器内部</span>
-docker <span class="token builtin class-name">exec</span> -it elasticsearch /bin/bash
+<h2 id="3-安装IK分词器"><a href="#3-安装IK分词器" class="headerlink" title="3.安装IK分词器"></a>3.安装IK分词器</h2><h3 id="3-1-在线安装ik插件（较慢）"><a href="#3-1-在线安装ik插件（较慢）" class="headerlink" title="3.1.在线安装ik插件（较慢）"></a>3.1.在线安装ik插件（较慢）</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 进入容器内部
+docker exec -it elasticsearch /bin/bash
 
-<span class="token comment"># 在线下载并安装</span>
-./bin/elasticsearch-plugin  <span class="token function">install</span> https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.12.1/elasticsearch-analysis-ik-7.12.1.zip
+# 在线下载并安装
+./bin/elasticsearch-plugin  install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.12.1/elasticsearch-analysis-ik-7.12.1.zip
 
-<span class="token comment">#退出</span>
-<span class="token builtin class-name">exit</span>
-<span class="token comment">#重启容器</span>
+#退出
+exit
+#重启容器
 docker restart elasticsearch<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="3-2-离线安装ik插件（推荐）"><a href="#3-2-离线安装ik插件（推荐）" class="headerlink" title="3.2.离线安装ik插件（推荐）"></a>3.2.离线安装ik插件（推荐）</h3><h3 id="1）查看数据卷目录"><a href="#1）查看数据卷目录" class="headerlink" title="1）查看数据卷目录"></a>1）查看数据卷目录</h3><p>安装插件需要知道elasticsearch的plugins目录位置，而我们用了数据卷挂载，因此需要查看elasticsearch的数据卷目录，通过下面命令查看:</p>
@@ -809,7 +809,7 @@ docker restart elasticsearch<span aria-hidden="true" class="line-numbers-rows"><
 
 
 
-<h3 id="4）重启容器"><a href="#4）重启容器" class="headerlink" title="4）重启容器"></a>4）重启容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 4、重启容器</span>
+<h3 id="4）重启容器"><a href="#4）重启容器" class="headerlink" title="4）重启容器"></a>4）重启容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 4、重启容器
 docker restart es<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 查看es日志
