@@ -675,7 +675,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    329
+                    345
                 </div>
                 
 
@@ -780,6 +780,9 @@ git rebase -i xxx
 
 <p>审视错误代码   重新合并</p>
 <pre class="line-numbers language-none"><code class="language-none">git push -f origin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>增量代码包</p>
+<pre class="line-numbers language-none"><code class="language-none">git diff commitID HEAD --name-only | xargs tar -rf name.tar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
                 
